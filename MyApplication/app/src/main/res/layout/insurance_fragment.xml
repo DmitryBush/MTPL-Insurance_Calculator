@@ -32,14 +32,14 @@
         android:id="@+id/prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="432dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="36dp"
         android:clickable="true"
         android:src="@mipmap/ic_prev"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/decript"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/next"
@@ -92,17 +92,16 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="62dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerPer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/insUsers"
-        app:layout_constraintTop_toBottomOf="@+id/decript"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/decript" />
 
     <Spinner
         android:id="@+id/spinnerPer"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/insPer"
-        tools:layout_editor_absoluteY="320dp" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerUsers" />
 </androidx.constraintlayout.widget.ConstraintLayout>
