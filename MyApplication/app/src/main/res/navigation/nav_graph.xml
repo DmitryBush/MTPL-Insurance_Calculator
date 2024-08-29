@@ -42,5 +42,41 @@
         <action
             android:id="@+id/action_personFragment_to_carFragment"
             app:destination="@id/carFragment" />
+        <action
+            android:id="@+id/action_personFragment_to_insuranceFragment"
+            app:destination="@id/insuranceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insuranceFragment"
+        android:name="com.bush.myapplication.InsuranceFragment"
+        android:label="InsuranceFragment" >
+        <action
+            android:id="@+id/action_insuranceFragment_to_personFragment"
+            app:destination="@id/personFragment" />
+        <action
+            android:id="@+id/action_insuranceFragment_to_newPersonFragment"
+            app:destination="@id/newPersonFragment" />
+        <action
+            android:id="@+id/action_insuranceFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPersonFragment"
+        android:name="com.bush.myapplication.person.NewPersonFragment"
+        android:label="NewPersonFragment" >
+        <action
+            android:id="@+id/action_newPersonFragment_to_personFragment"
+            app:destination="@id/personFragment" />
+        <action
+            android:id="@+id/action_newPersonFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.bush.myapplication.ResultFragment"
+        android:label="ResultFragment" >
+        <action
+            android:id="@+id/action_resultFragment_to_newPersonFragment"
+            app:destination="@id/newPersonFragment" />
     </fragment>
 </navigation>

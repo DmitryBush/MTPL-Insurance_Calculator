@@ -31,7 +31,7 @@ public class PersonFragment extends Fragment
 
         binding.next.setOnClickListener(v ->
                 NavHostFragment.findNavController(PersonFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment)
+                        .navigate(R.id.action_personFragment_to_insuranceFragment)
         );
 
         binding.prev.setOnClickListener(v ->
