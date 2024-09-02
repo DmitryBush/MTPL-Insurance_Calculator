@@ -2,12 +2,7 @@ package com.bush.myapplication;
 
 import android.os.Bundle;
 
-import com.bush.myapplication.databinding.CarFragmentBinding;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;

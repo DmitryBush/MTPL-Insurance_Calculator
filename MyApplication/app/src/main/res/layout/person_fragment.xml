@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="85dp"
         android:text="@string/personKBM"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/perPlace" />
@@ -98,7 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toEndOf="@+id/perKBM"
-        app:layout_constraintTop_toBottomOf="@+id/placeSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/placeConcrSpinner" />
 
     <Spinner
         android:id="@+id/placeSpinner"
@@ -109,6 +109,16 @@
         app:layout_constraintHorizontal_bias="0.435"
         app:layout_constraintStart_toEndOf="@+id/perPlace"
         app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+
+    <Spinner
+        android:id="@+id/placeConcrSpinner"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toEndOf="@+id/perPlace"
+        app:layout_constraintTop_toBottomOf="@+id/placeSpinner" />
 
     <TextView
         android:id="@+id/decript"
