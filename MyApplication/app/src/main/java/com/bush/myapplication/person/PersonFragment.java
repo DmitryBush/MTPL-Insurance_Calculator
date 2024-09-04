@@ -18,10 +18,13 @@ import com.bush.myapplication.database.Database;
 import com.bush.myapplication.database.DatabaseOpenner;
 import com.bush.myapplication.database.SQLCommands;
 import com.bush.myapplication.databinding.PersonFragmentBinding;
+import com.bush.myapplication.person.spinner.PersonPlaceActivity;
 
 public class PersonFragment extends Fragment implements AdapterView.OnItemSelectedListener
 {
     private PersonFragmentBinding binding;
+    private PersonPlaceActivity spinnerActivity;
+    //private Database database;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -33,6 +36,9 @@ public class PersonFragment extends Fragment implements AdapterView.OnItemSelect
 
         binding.placeSpinner.setAdapter(database.ExecuteSQL(SQLCommands.Select,
                 "Place", new String[]{"Subject"}));
+        spinnerActivity = new PersonPlaceActivity(binding, database);
+        binding.placeSpinner.setOnItemSelectedListener(spinnerActivity);
+
         binding.placeConcrSpinner.setAdapter(
                 database.ExecuteSQL(
                         "select cities.id as _id, * " +
@@ -67,7 +73,7 @@ public class PersonFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
-        adapterView.getItemAtPosition(i);
+
     }
 
     @Override

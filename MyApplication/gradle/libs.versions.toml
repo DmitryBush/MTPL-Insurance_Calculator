@@ -9,6 +9,7 @@ constraintlayout = "2.1.4"
 navigationFragment = "2.6.0"
 navigationUi = "2.6.0"
 postgresql = "42.7.3"
+springContext = "6.1.12"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -20,6 +21,10 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+spring-aop = { module = "org.springframework:spring-aop", version.ref = "springContext" }
+spring-beans = { module = "org.springframework:spring-beans", version.ref = "springContext" }
+spring-context = { module = "org.springframework:spring-context", version.ref = "springContext" }
+spring-core = { module = "org.springframework:spring-core", version.ref = "springContext" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
