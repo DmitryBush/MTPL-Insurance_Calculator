@@ -9,22 +9,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.bush.myapplication.config.Config;
 import com.bush.myapplication.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 public class MainActivity extends AppCompatActivity
 {
-    private AnnotationConfigApplicationContext context =
-            new AnnotationConfigApplicationContext(Config.class);
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());

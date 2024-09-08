@@ -4,14 +4,14 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.bush.myapplication.database.Database;
-import com.bush.myapplication.databinding.PersonFragmentBinding;
+import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
 
 public class PersonPlaceActivity implements AdapterView.OnItemSelectedListener
 {
-    private PersonFragmentBinding binding;
+    private PersonCreationFragmentBinding binding;
     private Database database;
 
-    public PersonPlaceActivity(PersonFragmentBinding binding, Database database)
+    public PersonPlaceActivity(PersonCreationFragmentBinding binding, Database database)
     {
         this.binding = binding;
         this.database = database;

@@ -73,12 +73,24 @@
         <item>Легковые и грузовые автомобили (Категория "B", "BE")</item>
     </string-array>
 
-    <string name="personTitle">
+    <string name="driversTitle">
+        Водители
+    </string>
+
+    <string name="personCreationTitle">
         О собственнике автомобиля
     </string>
 
-    <string name="personTitleDescript">
+    <string name="personCreationTitleDescript">
         Расскажите поподробнее о Вас
+    </string>
+
+    <string name="personName">
+        Имя
+    </string>
+
+    <string name="personSurname">
+        Фамилия
     </string>
 
     <string name="personAge">

@@ -4,18 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
+import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
+import com.bush.myapplication.car.button.CarLeftButtonHandler;
+import com.bush.myapplication.car.button.CarRightButtonHandler;
 import com.bush.myapplication.databinding.CarFragmentBinding;
-import com.google.android.material.snackbar.Snackbar;
 
-public class CarFragment extends Fragment implements AdapterView.OnItemSelectedListener
+public class CarFragment extends Fragment
 {
     private CarFragmentBinding binding;
 
@@ -23,7 +23,6 @@ public class CarFragment extends Fragment implements AdapterView.OnItemSelectedL
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState)
     {
-
         binding = CarFragmentBinding.inflate(inflater, container, false);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -33,7 +32,11 @@ public class CarFragment extends Fragment implements AdapterView.OnItemSelectedL
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         binding.carTypeSpinner.setAdapter(adapter);
-        binding.carTypeSpinner.setOnItemSelectedListener(this);
+
+        binding.prev.setOnClickListener(new CarLeftButtonHandler(binding, this));
+        binding.next.setOnClickListener(new CarRightButtonHandler(binding, this));
+
+        LoadSavedData();
 
         return binding.getRoot();
     }
@@ -41,16 +44,6 @@ public class CarFragment extends Fragment implements AdapterView.OnItemSelectedL
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-
-        binding.next.setOnClickListener(v ->
-                NavHostFragment.findNavController(CarFragment.this)
-                        .navigate(R.id.action_carFragment_to_personFragment)
-        );
-
-        binding.prev.setOnClickListener(v ->
-                NavHostFragment.findNavController(CarFragment.this)
-                        .navigate(R.id.action_carFragment_to_FirstFragment)
-        );
     }
 
     @Override
@@ -60,16 +53,11 @@ public class CarFragment extends Fragment implements AdapterView.OnItemSelectedL
         binding = null;
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+    private void LoadSavedData()
     {
-        System.out.println(i);
-        System.out.println("Something...");
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView)
-    {
-
+        if (MTPL.GetInstance().getCar().getPower() != 0)
+            binding.editTextNumberSigned.setText(
+                    String.valueOf(MTPL.GetInstance().getCar().getPower()));
+        binding.carTypeSpinner.setSelection(MTPL.GetInstance().getCar().getCarType());
     }
 }
