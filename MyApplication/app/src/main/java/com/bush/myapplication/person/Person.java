@@ -1,23 +1,27 @@
 package com.bush.myapplication.person;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class Person
 {
-    public static int id = 0;
-
     private String name;
     private String surname;
     private int age;
+    private LocalDate drivingLicenseRelease;
     private int region;
     private int city;
 
     private int CAECoefficient;
-    private int territorialCoefficient;
+    private float territorialCoefficient;
     private float accidentRate;
+    private int experience;
 
     public Person()
     {
         name = new String();
         surname = new String();
+        drivingLicenseRelease = null;
 
         age = 0;
         region = 0;
@@ -25,14 +29,13 @@ public class Person
         CAECoefficient = 0;
         territorialCoefficient = 0;
         accidentRate = 0;
-        id++;
     }
 
     public float getAccidentRate() {
         return accidentRate;
     }
 
-    public int getTerritorialCoefficient() {
+    public float getTerritorialCoefficient() {
         return territorialCoefficient;
     }
 
@@ -78,5 +81,31 @@ public class Person
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public LocalDate getDrivingLicenseRelease() {
+        return drivingLicenseRelease;
+    }
+
+    public void setDrivingLicenseRelease(LocalDate drivingLicenseRelease) {
+        this.drivingLicenseRelease = drivingLicenseRelease;
+        CalculateExperience();
+    }
+
+    private void CalculateExperience()
+    {
+        experience = Period.between(drivingLicenseRelease, LocalDate.now()).getYears();
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setTerritorialCoefficient(float territorialCoefficient) {
+        this.territorialCoefficient = territorialCoefficient;
+    }
+
+    public void setAccidentRate(float accidentRate) {
+        this.accidentRate = accidentRate;
     }
 }

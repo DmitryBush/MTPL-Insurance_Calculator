@@ -1,4 +1,4 @@
-package com.bush.myapplication;
+package com.bush.myapplication.insurance;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,9 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.bush.myapplication.car.CarFragment;
-import com.bush.myapplication.databinding.FragmentSecondBinding;
+import com.bush.myapplication.MTPL;
+import com.bush.myapplication.R;
 import com.bush.myapplication.databinding.InsuranceFragmentBinding;
+import com.bush.myapplication.insurance.buttons.InsuranceLeftButtonHandler;
+import com.bush.myapplication.insurance.buttons.InsuranceRightButtonHandler;
 
 public class InsuranceFragment extends Fragment
 {
@@ -21,8 +23,7 @@ public class InsuranceFragment extends Fragment
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    )
+            Bundle savedInstanceState)
     {
         binding = InsuranceFragmentBinding.inflate(inflater, container, false);
 
@@ -40,26 +41,33 @@ public class InsuranceFragment extends Fragment
 
         binding.spinnerUsers.setAdapter(restrictionsAdapter);
         binding.spinnerPer.setAdapter(vehiclePeriodAdapter);
+
+        binding.prev.setOnClickListener(new InsuranceLeftButtonHandler(this, binding));
+        binding.next.setOnClickListener(new InsuranceRightButtonHandler(this, binding));
+
+        LoadSavedData();
+
         return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.next.setOnClickListener(v ->
-                NavHostFragment.findNavController(InsuranceFragment.this)
-                        .navigate(R.id.action_insuranceFragment_to_newPersonFragment)
-        );
-
-        binding.prev.setOnClickListener(v ->
-                NavHostFragment.findNavController(InsuranceFragment.this)
-                        .navigate(R.id.action_insuranceFragment_to_personFragment)
-        );
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void LoadSavedData()
+    {
+        if (MTPL.GetInstance().isDriversLimit())
+            binding.spinnerUsers.setSelection(1);
+        else
+            binding.spinnerUsers.setSelection(0);
+
+        binding.spinnerPer.setSelection(MTPL.GetInstance().getCarPeriod());
     }
 }

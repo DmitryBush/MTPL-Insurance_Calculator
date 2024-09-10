@@ -154,8 +154,8 @@
     </string>
 
     <string-array name="driversRestrictions">
-        <item>Есть</item>
         <item>Нет</item>
+        <item>Есть</item>
     </string-array>
 
     <string-array name="vechiclePeriod">

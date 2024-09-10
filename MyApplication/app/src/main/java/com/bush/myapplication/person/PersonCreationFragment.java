@@ -14,6 +14,9 @@ import com.bush.myapplication.R;
 import com.bush.myapplication.database.Database;
 import com.bush.myapplication.database.SQLCommands;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
+import com.bush.myapplication.person.builder.PersonBuilder;
+import com.bush.myapplication.person.button.PersonLeftButtonHandler;
+import com.bush.myapplication.person.button.PersonRightButtonHandler;
 import com.bush.myapplication.person.spinner.PersonPlaceActivity;
 
 public class PersonCreationFragment extends Fragment
@@ -27,10 +30,12 @@ public class PersonCreationFragment extends Fragment
         binding = PersonCreationFragmentBinding.inflate(inflater, container, false);
 
         Database database = new Database(getContext(), "RussianSubjects.db");
+        PersonBuilder human = new PersonBuilder();
 
         binding.placeSpinner.setAdapter(database.ExecuteSQL(SQLCommands.Select,
                 "Place", new String[]{"Subject"}));
-        binding.placeSpinner.setOnItemSelectedListener(new PersonPlaceActivity(binding, database));
+        binding.placeSpinner.setOnItemSelectedListener(
+                new PersonPlaceActivity(binding, database, human));
 
         binding.placeConcrSpinner.setAdapter(
                 database.ExecuteSQL(
@@ -39,9 +44,10 @@ public class PersonCreationFragment extends Fragment
                                 "AND cities.subject = 2 WHERE Place.Subject is NOT NULL",
                         new String[]{"city", "subject"}));
 
-//        Person chel = new Person();
-//        chel.setName("Иван"); chel.setSurname("Ivanovich");
-//        MTPL.GetInstance().getPersonList().add(chel);
+        binding.prev.setOnClickListener(new PersonLeftButtonHandler(binding, this,
+                human, database));
+        binding.next.setOnClickListener(new PersonRightButtonHandler(binding, this,
+                human, database));
         return binding.getRoot();
     }
 
@@ -49,15 +55,15 @@ public class PersonCreationFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.next.setOnClickListener(v ->
-                NavHostFragment.findNavController(PersonCreationFragment.this)
-                        .navigate(R.id.action_personFragment_to_insuranceFragment)
-        );
-
-        binding.prev.setOnClickListener(v ->
-                NavHostFragment.findNavController(PersonCreationFragment.this)
-                        .navigate(R.id.action_personFragment_to_carFragment)
-        );
+//        binding.next.setOnClickListener(v ->
+//                NavHostFragment.findNavController(PersonCreationFragment.this)
+//                        .navigate(R.id.action_personFragment_to_insuranceFragment)
+//        );
+//
+//        binding.prev.setOnClickListener(v ->
+//                NavHostFragment.findNavController(PersonCreationFragment.this)
+//                        .navigate(R.id.action_personFragment_to_carFragment)
+//        );
     }
 
     @Override

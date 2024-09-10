@@ -8,25 +8,22 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
 import com.bush.myapplication.button.ClickHandler;
-import com.bush.myapplication.car.CarFragment;
-import com.bush.myapplication.car.builder.CarBuilder;
 import com.bush.myapplication.database.Database;
-import com.bush.myapplication.databinding.CarFragmentBinding;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
 import com.bush.myapplication.person.PersonCreationFragment;
 import com.bush.myapplication.person.builder.PersonBuilder;
 
 import java.time.LocalDate;
 
-public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListener
+public class PersonRightButtonHandler implements ClickHandler, View.OnClickListener
 {
     private PersonCreationFragmentBinding binding;
     private PersonCreationFragment fragment;
     private PersonBuilder personBuilder;
     private Database database;
 
-    public PersonLeftButtonHandler(PersonCreationFragmentBinding binding,
-                                    PersonCreationFragment fragment, PersonBuilder personBuilder,
+    public PersonRightButtonHandler(PersonCreationFragmentBinding binding,
+                                   PersonCreationFragment fragment, PersonBuilder personBuilder,
                                     Database database)
     {
         this.binding = binding;
@@ -50,19 +47,18 @@ public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListen
             cursor.move(binding.placeConcrSpinner.getSelectedItemPosition());
             coefficient = cursor.getFloat(3);
         }
-        System.out.println(coefficient);
         MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.name.getText().toString())
-                     .SetSurname(binding.surname.getText().toString())
-                     .SetAge(ParseNumericEditText(binding.ageText.getText().toString()))
-                     .SetDateLicenseRelease(ParseDate(binding.editTextDate.getText().toString()))
-                     .SetRegion(binding.placeSpinner.getSelectedItemPosition())
-                     .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
-                     .SetTerritorialCoefficient(coefficient)
-                     .SetAccidentRate(ParseFloatText(binding.KBMText.getText().toString()))
-                     .Build());
+                .SetSurname(binding.surname.getText().toString())
+                .SetAge(ParseNumericEditText(binding.ageText.getText().toString()))
+                .SetDateLicenseRelease(ParseDate(binding.editTextDate.getText().toString()))
+                .SetRegion(binding.placeSpinner.getSelectedItemPosition())
+                .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
+                .SetTerritorialCoefficient(coefficient)
+                .SetAccidentRate(ParseFloatText(binding.KBMText.getText().toString()))
+                .Build());
 
         NavHostFragment.findNavController(fragment)
-                .navigate(R.id.action_personFragment_to_carFragment);
+                .navigate(R.id.action_personFragment_to_insuranceFragment);
     }
 
     @Override
@@ -101,7 +97,7 @@ public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListen
     @Override
     public LocalDate ParseDate(String str)
     {
-        String[] strArray = str.split("[.] ");
+        String[] strArray = str.split("[.]");
 
         return LocalDate.of(ParseNumericEditText(strArray[2]), ParseNumericEditText(strArray[1]),
                 ParseNumericEditText(strArray[0]));

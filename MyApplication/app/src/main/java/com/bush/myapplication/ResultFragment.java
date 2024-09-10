@@ -22,6 +22,8 @@ public class ResultFragment extends Fragment
     ) {
 
         binding = ResultFragmentBinding.inflate(inflater, container, false);
+        binding.result.setText(String.valueOf(MTPL.GetInstance().CalculateMTPL(getContext())));
+
         return binding.getRoot();
     }
 
