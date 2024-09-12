@@ -50,9 +50,9 @@ public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListen
             cursor.move(binding.placeConcrSpinner.getSelectedItemPosition());
             coefficient = cursor.getFloat(3);
         }
-        System.out.println(coefficient);
-        MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.name.getText().toString())
-                     .SetSurname(binding.surname.getText().toString())
+
+        MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.nameInput.getText().toString())
+                     .SetSurname(binding.surnameInput.getText().toString())
                      .SetAge(ParseNumericEditText(binding.ageText.getText().toString()))
                      .SetDateLicenseRelease(ParseDate(binding.editTextDate.getText().toString()))
                      .SetRegion(binding.placeSpinner.getSelectedItemPosition())
@@ -101,9 +101,14 @@ public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListen
     @Override
     public LocalDate ParseDate(String str)
     {
-        String[] strArray = str.split("[.] ");
+        if (str.isEmpty())
+            return LocalDate.of(1900, 1, 1);
+        else
+        {
+            String[] strArray = str.split("[.]");
 
-        return LocalDate.of(ParseNumericEditText(strArray[2]), ParseNumericEditText(strArray[1]),
-                ParseNumericEditText(strArray[0]));
+            return LocalDate.of(ParseNumericEditText(strArray[2]), ParseNumericEditText(strArray[1]),
+                    ParseNumericEditText(strArray[0]));
+        }
     }
 }

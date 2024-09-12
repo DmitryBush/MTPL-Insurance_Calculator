@@ -48,9 +48,6 @@
         <action
             android:id="@+id/action_personFragment_to_insuranceFragment"
             app:destination="@id/insuranceFragment" />
-        <action
-            android:id="@+id/action_personFragment_to_personListFragment"
-            app:destination="@id/personListFragment" />
     </fragment>
     <fragment
         android:id="@+id/insuranceFragment"
@@ -65,6 +62,9 @@
         <action
             android:id="@+id/action_insuranceFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
+        <action
+            android:id="@+id/action_insuranceFragment_to_personListFragment"
+            app:destination="@id/personListFragment" />
     </fragment>
     <fragment
         android:id="@+id/newPersonFragment"
@@ -88,5 +88,15 @@
     <fragment
         android:id="@+id/personListFragment"
         android:name="com.bush.myapplication.person.PersonListFragment"
-        android:label="PersonListFragment" />
+        android:label="PersonListFragment" >
+        <action
+            android:id="@+id/action_personListFragment_to_insuranceFragment"
+            app:destination="@id/insuranceFragment" />
+        <action
+            android:id="@+id/action_personListFragment_to_personFragment"
+            app:destination="@id/personFragment" />
+        <action
+            android:id="@+id/action_personListFragment_to_carFragment"
+            app:destination="@id/carFragment" />
+    </fragment>
 </navigation>

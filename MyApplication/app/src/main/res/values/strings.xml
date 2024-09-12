@@ -168,4 +168,8 @@
         <item>От 8 до 9 месяцев</item>
         <item>Свыше 9 месяцев</item>
     </string-array>
+
+    <string name="nameSurname">
+        Имя Фамилия
+    </string>
 </resources>

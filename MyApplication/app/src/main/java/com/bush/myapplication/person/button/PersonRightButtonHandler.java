@@ -47,8 +47,8 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
             cursor.move(binding.placeConcrSpinner.getSelectedItemPosition());
             coefficient = cursor.getFloat(3);
         }
-        MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.name.getText().toString())
-                .SetSurname(binding.surname.getText().toString())
+        MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.nameInput.getText().toString())
+                .SetSurname(binding.surnameInput.getText().toString())
                 .SetAge(ParseNumericEditText(binding.ageText.getText().toString()))
                 .SetDateLicenseRelease(ParseDate(binding.editTextDate.getText().toString()))
                 .SetRegion(binding.placeSpinner.getSelectedItemPosition())

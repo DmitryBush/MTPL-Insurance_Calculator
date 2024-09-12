@@ -35,8 +35,12 @@ public class InsuranceRightButtonHandler implements ClickHandler, View.OnClickLi
                 PearseBooleanValue(binding.spinnerUsers.getSelectedItemPosition()));
         MTPL.GetInstance().setCarPeriod(binding.spinnerPer.getSelectedItemPosition());
 
-        NavHostFragment.findNavController(fragment)
-                .navigate(R.id.action_insuranceFragment_to_newPersonFragment);
+        if (MTPL.GetInstance().getPersonList().size() > 1)
+            NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_carFragment_to_personListFragment);
+        else
+            NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_carFragment_to_personFragment);
     }
 
     @Override

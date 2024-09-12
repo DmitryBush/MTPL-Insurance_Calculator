@@ -15,6 +15,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nameText">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/surnameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/personSurname" />
@@ -206,6 +207,7 @@
         app:layout_constraintTop_toBottomOf="@+id/decript">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/personName" />

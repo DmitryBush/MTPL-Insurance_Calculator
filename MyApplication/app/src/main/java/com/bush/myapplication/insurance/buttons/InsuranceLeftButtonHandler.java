@@ -36,8 +36,12 @@ public class InsuranceLeftButtonHandler implements ClickHandler, View.OnClickLis
                 .getSelectedItemPosition()));
         MTPL.GetInstance().setCarPeriod(binding.spinnerPer.getSelectedItemPosition());
 
-        NavHostFragment.findNavController(fragment)
-                .navigate(R.id.action_insuranceFragment_to_personFragment);
+        if (MTPL.GetInstance().getPersonList().size() > 1)
+            NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_carFragment_to_personListFragment);
+        else
+            NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_carFragment_to_personFragment);
     }
 
     @Override

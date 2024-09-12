@@ -23,8 +23,6 @@ public class PersonListFragment extends Fragment
     {
         binding = PersonListFragmentBinding.inflate(inflater, container, false);
 
-        //PersonRecyclerView adapter = new PersonRecyclerView();
-
         binding.driversView.setAdapter(new PersonRecyclerView());
         binding.driversView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -34,16 +32,6 @@ public class PersonListFragment extends Fragment
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-
-//        binding.next.setOnClickListener(v ->
-//                NavHostFragment.findNavController(PersonCreationFragment.this)
-//                        .navigate(R.id.action_personFragment_to_insuranceFragment)
-//        );
-//
-//        binding.prev.setOnClickListener(v ->
-//                NavHostFragment.findNavController(PersonCreationFragment.this)
-//                        .navigate(R.id.action_personFragment_to_carFragment)
-//        );
     }
 
     @Override

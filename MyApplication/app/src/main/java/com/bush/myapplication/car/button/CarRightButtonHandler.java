@@ -31,11 +31,13 @@ public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
                 .SetPower(ParseNumericEditText(binding.editTextNumberSigned.getText().toString()))
                 .SetCarType(binding.carTypeSpinner.getSelectedItemPosition())
                 .Build());
-        System.out.println(MTPL.GetInstance().getCar().getPower() + " " + MTPL.GetInstance().getCar().getPowerCoefficient());
 
-
-        NavHostFragment.findNavController(fragment)
-                .navigate(R.id.action_carFragment_to_personFragment);
+        if (MTPL.GetInstance().getPersonList().size() > 1)
+            NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_carFragment_to_personListFragment);
+        else
+            NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_carFragment_to_personFragment);
     }
 
     @Override
