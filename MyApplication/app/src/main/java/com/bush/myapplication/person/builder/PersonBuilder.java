@@ -1,5 +1,7 @@
 package com.bush.myapplication.person.builder;
 
+import android.content.Context;
+
 import com.bush.myapplication.person.Person;
 
 import java.time.LocalDate;
@@ -53,8 +55,10 @@ public class PersonBuilder
         instance.setAccidentRate(rate);
         return this;
     }
-    public Person Build()
+    public Person Build(Context context)
     {
+        if (instance.getAge() != Integer.MIN_VALUE && instance.getExperience() != Float.MIN_VALUE)
+            instance.CalculateCAECoefficient(context);
         return instance;
     }
 }

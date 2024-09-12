@@ -1,10 +1,16 @@
 package com.bush.myapplication.person;
 
+import android.content.Context;
+
+import com.bush.myapplication.structures.tableCAE.TableCAE;
+
 import java.time.LocalDate;
 import java.time.Period;
 
 public class Person
 {
+    private static volatile TableCAE tableCAE = null;
+
     private String name;
     private String surname;
     private int age;
@@ -12,7 +18,7 @@ public class Person
     private int region;
     private int city;
 
-    private int CAECoefficient;
+    private float CAECoefficient;
     private float territorialCoefficient;
     private float accidentRate;
     private int experience;
@@ -23,12 +29,13 @@ public class Person
         surname = new String();
         drivingLicenseRelease = null;
 
-        age = 0;
+        age = Integer.MIN_VALUE;
         region = 0;
         city = 0;
-        CAECoefficient = 0;
         territorialCoefficient = 0;
         accidentRate = 0;
+        experience = Integer.MIN_VALUE;
+        CAECoefficient = 0;
     }
 
     public float getAccidentRate() {
@@ -37,10 +44,6 @@ public class Person
 
     public float getTerritorialCoefficient() {
         return territorialCoefficient;
-    }
-
-    public int getCAECoefficient() {
-        return CAECoefficient;
     }
 
     public int getAge() {
@@ -107,5 +110,28 @@ public class Person
 
     public void setAccidentRate(float accidentRate) {
         this.accidentRate = accidentRate;
+    }
+
+    public float getCAECoefficient() {
+        return CAECoefficient;
+    }
+
+    public void setCAECoefficient(float CAECoefficient) {
+        this.CAECoefficient = CAECoefficient;
+    }
+
+    public void CalculateCAECoefficient(Context context)
+    {
+        if (tableCAE == null)
+        {
+            synchronized (TableCAE.class)
+            {
+                if (tableCAE == null)
+                {
+                    tableCAE = new TableCAE(context);
+                }
+            }
+        }
+        CAECoefficient = tableCAE.GetCoefficient(age, experience);
     }
 }

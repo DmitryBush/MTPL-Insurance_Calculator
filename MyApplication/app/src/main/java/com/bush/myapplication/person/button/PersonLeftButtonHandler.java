@@ -8,10 +8,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
 import com.bush.myapplication.button.ClickHandler;
-import com.bush.myapplication.car.CarFragment;
-import com.bush.myapplication.car.builder.CarBuilder;
 import com.bush.myapplication.database.Database;
-import com.bush.myapplication.databinding.CarFragmentBinding;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
 import com.bush.myapplication.person.PersonCreationFragment;
 import com.bush.myapplication.person.builder.PersonBuilder;
@@ -53,13 +50,13 @@ public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListen
 
         MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.nameInput.getText().toString())
                      .SetSurname(binding.surnameInput.getText().toString())
-                     .SetAge(ParseNumericEditText(binding.ageText.getText().toString()))
+                     .SetAge(ParseIntegerText(binding.ageText.getText().toString()))
                      .SetDateLicenseRelease(ParseDate(binding.editTextDate.getText().toString()))
                      .SetRegion(binding.placeSpinner.getSelectedItemPosition())
                      .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
                      .SetTerritorialCoefficient(coefficient)
                      .SetAccidentRate(ParseFloatText(binding.KBMText.getText().toString()))
-                     .Build());
+                     .Build(fragment.getContext()));
 
         NavHostFragment.findNavController(fragment)
                 .navigate(R.id.action_personFragment_to_carFragment);
@@ -71,10 +68,10 @@ public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListen
         OnClickHandler();
     }
     @Override
-    public int ParseNumericEditText(String str)
+    public int ParseIntegerText(String str)
     {
         if (str.isEmpty())
-            return 0;
+            return Integer.MIN_VALUE;
         else
             return Integer.parseInt(str.toString());
     }
@@ -83,7 +80,7 @@ public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListen
     public float ParseFloatText(String str)
     {
         if (str.isEmpty())
-            return 0;
+            return Float.MIN_VALUE;
         else
             return Float.parseFloat(str.toString());
     }
@@ -107,8 +104,8 @@ public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListen
         {
             String[] strArray = str.split("[.]");
 
-            return LocalDate.of(ParseNumericEditText(strArray[2]), ParseNumericEditText(strArray[1]),
-                    ParseNumericEditText(strArray[0]));
+            return LocalDate.of(ParseIntegerText(strArray[2]), ParseIntegerText(strArray[1]),
+                    ParseIntegerText(strArray[0]));
         }
     }
 }

@@ -35,7 +35,12 @@ public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.
         holder.nameSurname.setText(
                 MTPL.GetInstance().getPersonList().get(position).getName() + " " +
                         MTPL.GetInstance().getPersonList().get(position).getSurname());
-        holder.aboutPerson.setText("Вот он");
+        holder.aboutPerson.setText("Территориальный коэффицент: "
+                + MTPL.GetInstance().getPersonList().get(position).getTerritorialCoefficient()
+                + ", Коэффицент КБС: "
+                + MTPL.GetInstance().getPersonList().get(position).getAccidentRate()
+                + ", Коэффицент КВС: "
+                + MTPL.GetInstance().getPersonList().get(position).getCAECoefficient());
     }
 
     @Override

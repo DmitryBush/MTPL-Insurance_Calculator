@@ -119,22 +119,21 @@ public class MTPL
         }
     }
 
-    public float CalculateMTPL(Context context)
+    public float CalculateMTPL()
     {
         System.out.println(car.getBasePrice());
         System.out.println(personList.get(0).getTerritorialCoefficient());
         System.out.println(personList.get(0).getAccidentRate());
         System.out.println(limitingCoefficient);
-        System.out.println(new TableCAE(context).GetCAECoefficient(personList.get(0).getAge(),
-                personList.get(0).getExperience()));
+        System.out.println(personList.get(0).getCAECoefficient());
         System.out.println(car.getPowerCoefficient());
         System.out.println(seasonalityCoefficient);
 
         return car.getBasePrice() * personList.get(0).getTerritorialCoefficient()
                 * personList.get(0).getAccidentRate()
                 * limitingCoefficient
-                * new TableCAE(context).GetCAECoefficient(personList.get(0).getAge(),
-                personList.get(0).getExperience()) * car.getPowerCoefficient()
+                * personList.get(0).getCAECoefficient()
+                * car.getPowerCoefficient()
                 * seasonalityCoefficient;
     }
 }

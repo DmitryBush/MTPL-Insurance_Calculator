@@ -27,7 +27,7 @@ public class CarLeftButtonHandler implements ClickHandler, View.OnClickListener
     public void OnClickHandler()
     {
         MTPL.GetInstance().SetCar(new CarBuilder()
-                .SetPower(ParseNumericEditText(binding.editTextNumberSigned.getText().toString()))
+                .SetPower(ParseIntegerText(binding.editTextNumberSigned.getText().toString()))
                 .SetCarType(binding.carTypeSpinner.getSelectedItemPosition())
                 .Build());
         System.out.println("here");
@@ -41,7 +41,7 @@ public class CarLeftButtonHandler implements ClickHandler, View.OnClickListener
         OnClickHandler();
     }
     @Override
-    public int ParseNumericEditText(String str)
+    public int ParseIntegerText(String str)
     {
         if (str.isEmpty())
             return 0;

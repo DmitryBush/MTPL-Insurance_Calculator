@@ -47,11 +47,11 @@ public class TableCAE
                             cursor.getInt(3), cursor.getInt(4), cursor.getFloat(5)));
     }
 
-    public float GetCAECoefficient(int age, int experience)
+    public float GetCoefficient(int age, int experience)
     {
         for (TableProperties i: table)
         {
-            if (i.matches(66, 20))
+            if (i.matches(age, experience))
                 return i.coefficient;
         }
         return 0;

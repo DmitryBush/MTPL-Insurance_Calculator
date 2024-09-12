@@ -36,7 +36,7 @@ public class InsuranceLeftButtonHandler implements ClickHandler, View.OnClickLis
                 .getSelectedItemPosition()));
         MTPL.GetInstance().setCarPeriod(binding.spinnerPer.getSelectedItemPosition());
 
-        if (MTPL.GetInstance().getPersonList().size() > 1)
+        if (MTPL.GetInstance().getPersonList().size() > 0)
             NavHostFragment.findNavController(fragment)
                     .navigate(R.id.action_carFragment_to_personListFragment);
         else
@@ -45,7 +45,7 @@ public class InsuranceLeftButtonHandler implements ClickHandler, View.OnClickLis
     }
 
     @Override
-    public int ParseNumericEditText(String str) {
+    public int ParseIntegerText(String str) {
         return 0;
     }
 

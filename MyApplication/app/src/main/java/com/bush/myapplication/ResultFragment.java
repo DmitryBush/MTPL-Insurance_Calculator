@@ -1,5 +1,6 @@
 package com.bush.myapplication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +16,14 @@ public class ResultFragment extends Fragment
 {
     private ResultFragmentBinding binding;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
+            Bundle savedInstanceState)
+    {
         binding = ResultFragmentBinding.inflate(inflater, container, false);
-        binding.result.setText(String.valueOf(MTPL.GetInstance().CalculateMTPL(getContext())));
+        binding.result.setText(String.valueOf(MTPL.GetInstance().CalculateMTPL()) + " рубля");
 
         return binding.getRoot();
     }

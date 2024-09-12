@@ -26,13 +26,13 @@ public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
     @Override
     public void OnClickHandler()
     {
-        System.out.println(ParseNumericEditText(binding.editTextNumberSigned.getText().toString()));
+        System.out.println(ParseIntegerText(binding.editTextNumberSigned.getText().toString()));
         MTPL.GetInstance().SetCar(new CarBuilder()
-                .SetPower(ParseNumericEditText(binding.editTextNumberSigned.getText().toString()))
+                .SetPower(ParseIntegerText(binding.editTextNumberSigned.getText().toString()))
                 .SetCarType(binding.carTypeSpinner.getSelectedItemPosition())
                 .Build());
 
-        if (MTPL.GetInstance().getPersonList().size() > 1)
+        if (MTPL.GetInstance().getPersonList().size() > 0)
             NavHostFragment.findNavController(fragment)
                     .navigate(R.id.action_carFragment_to_personListFragment);
         else
@@ -46,7 +46,7 @@ public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
         OnClickHandler();
     }
     @Override
-    public int ParseNumericEditText(String str)
+    public int ParseIntegerText(String str)
     {
         if (str.isEmpty())
             return 0;

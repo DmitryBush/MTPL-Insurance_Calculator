@@ -49,13 +49,13 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
         }
         MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.nameInput.getText().toString())
                 .SetSurname(binding.surnameInput.getText().toString())
-                .SetAge(ParseNumericEditText(binding.ageText.getText().toString()))
+                .SetAge(ParseIntegerText(binding.ageText.getText().toString()))
                 .SetDateLicenseRelease(ParseDate(binding.editTextDate.getText().toString()))
                 .SetRegion(binding.placeSpinner.getSelectedItemPosition())
                 .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
                 .SetTerritorialCoefficient(coefficient)
                 .SetAccidentRate(ParseFloatText(binding.KBMText.getText().toString()))
-                .Build());
+                .Build(fragment.getContext()));
 
         NavHostFragment.findNavController(fragment)
                 .navigate(R.id.action_personFragment_to_insuranceFragment);
@@ -67,10 +67,10 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
         OnClickHandler();
     }
     @Override
-    public int ParseNumericEditText(String str)
+    public int ParseIntegerText(String str)
     {
         if (str.isEmpty())
-            return 0;
+            return Integer.MIN_VALUE;
         else
             return Integer.parseInt(str.toString());
     }
@@ -79,7 +79,7 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
     public float ParseFloatText(String str)
     {
         if (str.isEmpty())
-            return 0;
+            return Float.MIN_VALUE;
         else
             return Float.parseFloat(str.toString());
     }
@@ -97,9 +97,14 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
     @Override
     public LocalDate ParseDate(String str)
     {
-        String[] strArray = str.split("[.]");
+        if (str.isEmpty())
+            return LocalDate.of(1900, 1, 1);
+        else
+        {
+            String[] strArray = str.split("[.]");
 
-        return LocalDate.of(ParseNumericEditText(strArray[2]), ParseNumericEditText(strArray[1]),
-                ParseNumericEditText(strArray[0]));
+            return LocalDate.of(ParseIntegerText(strArray[2]), ParseIntegerText(strArray[1]),
+                    ParseIntegerText(strArray[0]));
+        }
     }
 }

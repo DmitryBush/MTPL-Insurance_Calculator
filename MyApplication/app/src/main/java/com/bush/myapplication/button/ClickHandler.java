@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public interface ClickHandler
 {
     public void OnClickHandler();
-    public int ParseNumericEditText(String str);
+    public int ParseIntegerText(String str);
     public float ParseFloatText(String str);
     public boolean PearseBooleanValue(String str);
     public boolean PearseBooleanValue(int value);
