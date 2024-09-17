@@ -38,10 +38,10 @@ public class InsuranceLeftButtonHandler implements ClickHandler, View.OnClickLis
 
         if (MTPL.GetInstance().getPersonList().size() > 0)
             NavHostFragment.findNavController(fragment)
-                    .navigate(R.id.action_carFragment_to_personListFragment);
+                    .navigate(R.id.action_insuranceFragment_to_personListFragment);
         else
             NavHostFragment.findNavController(fragment)
-                    .navigate(R.id.action_carFragment_to_personFragment);
+                    .navigate(R.id.action_insuranceFragment_to_personFragment);
     }
 
     @Override

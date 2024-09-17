@@ -28,14 +28,6 @@ public class NewPersonFragment extends Fragment
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        binding.AddDriver.setOnClickListener(v ->
-                NavHostFragment.findNavController(NewPersonFragment.this)
-                        .navigate(R.id.action_newPersonFragment_to_personFragment));
-
-        binding.DisagreeDriver.setOnClickListener(v ->
-                NavHostFragment.findNavController(NewPersonFragment.this)
-                        .navigate(R.id.action_newPersonFragment_to_resultFragment));
     }
 
     @Override

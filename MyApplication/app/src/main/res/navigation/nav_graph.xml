@@ -18,12 +18,7 @@
         android:id="@+id/SecondFragment"
         android:name="com.bush.myapplication.SecondFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_second"/>
     <fragment
         android:id="@+id/carFragment"
         android:name="com.bush.myapplication.car.CarFragment"
@@ -33,21 +28,21 @@
             app:destination="@id/FirstFragment" />
         <action
             android:id="@+id/action_carFragment_to_personFragment"
-            app:destination="@id/personFragment" />
+            app:destination="@id/personCreationFragment" />
         <action
             android:id="@+id/action_carFragment_to_personListFragment"
             app:destination="@id/personListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/personFragment"
-        android:name="com.bush.myapplication.person.PersonCreationFragment"
-        android:label="PersonFragment" >
+        android:id="@+id/personCreationFragment"
+        android:name="com.bush.myapplication.person.creation.PersonCreationFragment"
+        android:label="PersonCreationFragment">
         <action
             android:id="@+id/action_personFragment_to_carFragment"
             app:destination="@id/carFragment" />
         <action
-            android:id="@+id/action_personFragment_to_insuranceFragment"
-            app:destination="@id/insuranceFragment" />
+            android:id="@+id/action_personCreationFragment_to_personListFragment"
+            app:destination="@id/personListFragment" />
     </fragment>
     <fragment
         android:id="@+id/insuranceFragment"
@@ -55,10 +50,7 @@
         android:label="InsuranceFragment" >
         <action
             android:id="@+id/action_insuranceFragment_to_personFragment"
-            app:destination="@id/personFragment" />
-        <action
-            android:id="@+id/action_insuranceFragment_to_newPersonFragment"
-            app:destination="@id/newPersonFragment" />
+            app:destination="@id/personCreationFragment" />
         <action
             android:id="@+id/action_insuranceFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
@@ -67,34 +59,23 @@
             app:destination="@id/personListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/newPersonFragment"
-        android:name="com.bush.myapplication.person.NewPersonFragment"
-        android:label="NewPersonFragment" >
-        <action
-            android:id="@+id/action_newPersonFragment_to_personFragment"
-            app:destination="@id/personFragment" />
-        <action
-            android:id="@+id/action_newPersonFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/resultFragment"
         android:name="com.bush.myapplication.ResultFragment"
         android:label="ResultFragment" >
         <action
-            android:id="@+id/action_resultFragment_to_newPersonFragment"
-            app:destination="@id/newPersonFragment" />
+            android:id="@+id/action_resultFragment_to_insuranceFragment"
+            app:destination="@id/insuranceFragment" />
     </fragment>
     <fragment
         android:id="@+id/personListFragment"
-        android:name="com.bush.myapplication.person.PersonListFragment"
+        android:name="com.bush.myapplication.person.listview.PersonListFragment"
         android:label="PersonListFragment" >
         <action
             android:id="@+id/action_personListFragment_to_insuranceFragment"
             app:destination="@id/insuranceFragment" />
         <action
             android:id="@+id/action_personListFragment_to_personFragment"
-            app:destination="@id/personFragment" />
+            app:destination="@id/personCreationFragment" />
         <action
             android:id="@+id/action_personListFragment_to_carFragment"
             app:destination="@id/carFragment" />

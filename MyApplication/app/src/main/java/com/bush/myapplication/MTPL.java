@@ -121,18 +121,28 @@ public class MTPL
 
     public float CalculateMTPL()
     {
+        Person resultPerson = new Person();
+        for (Person i : personList)
+        {
+            resultPerson.setCAECoefficient(
+                    Float.max(i.getCAECoefficient(), resultPerson.getCAECoefficient()));
+            resultPerson.setAccidentRate(
+                    Float.max(i.getAccidentRate(), resultPerson.getAccidentRate()));
+            resultPerson.setTerritorialCoefficient(Float.max(
+                            i.getTerritorialCoefficient(), resultPerson.getTerritorialCoefficient()));
+        }
         System.out.println(car.getBasePrice());
-        System.out.println(personList.get(0).getTerritorialCoefficient());
-        System.out.println(personList.get(0).getAccidentRate());
+        System.out.println(resultPerson.getTerritorialCoefficient());
+        System.out.println(resultPerson.getAccidentRate());
         System.out.println(limitingCoefficient);
-        System.out.println(personList.get(0).getCAECoefficient());
+        System.out.println(resultPerson.getCAECoefficient());
         System.out.println(car.getPowerCoefficient());
         System.out.println(seasonalityCoefficient);
 
-        return car.getBasePrice() * personList.get(0).getTerritorialCoefficient()
-                * personList.get(0).getAccidentRate()
+        return car.getBasePrice() * resultPerson.getTerritorialCoefficient()
+                * resultPerson.getAccidentRate()
                 * limitingCoefficient
-                * personList.get(0).getCAECoefficient()
+                * resultPerson.getCAECoefficient()
                 * car.getPowerCoefficient()
                 * seasonalityCoefficient;
     }

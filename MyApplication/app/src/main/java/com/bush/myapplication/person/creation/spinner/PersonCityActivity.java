@@ -1,4 +1,4 @@
-package com.bush.myapplication.person.spinner;
+package com.bush.myapplication.person.creation.spinner;
 
 import android.database.Cursor;
 import android.view.View;

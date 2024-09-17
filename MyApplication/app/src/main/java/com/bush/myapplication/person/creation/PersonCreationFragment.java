@@ -1,4 +1,4 @@
-package com.bush.myapplication.person;
+package com.bush.myapplication.person.creation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,17 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.bush.myapplication.MTPL;
-import com.bush.myapplication.R;
 import com.bush.myapplication.database.Database;
 import com.bush.myapplication.database.SQLCommands;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
+import com.bush.myapplication.person.creation.spinner.PersonPlaceActivity;
 import com.bush.myapplication.person.builder.PersonBuilder;
-import com.bush.myapplication.person.button.PersonLeftButtonHandler;
-import com.bush.myapplication.person.button.PersonRightButtonHandler;
-import com.bush.myapplication.person.spinner.PersonPlaceActivity;
+import com.bush.myapplication.person.creation.button.PersonLeftButtonHandler;
+import com.bush.myapplication.person.creation.button.PersonRightButtonHandler;
 
 public class PersonCreationFragment extends Fragment
 {

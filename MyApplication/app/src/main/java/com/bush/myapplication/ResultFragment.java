@@ -33,7 +33,7 @@ public class ResultFragment extends Fragment
 
         binding.prev.setOnClickListener(v ->
                 NavHostFragment.findNavController(ResultFragment.this)
-                        .navigate(R.id.action_resultFragment_to_newPersonFragment)
+                        .navigate(R.id.action_resultFragment_to_insuranceFragment)
         );
     }
 

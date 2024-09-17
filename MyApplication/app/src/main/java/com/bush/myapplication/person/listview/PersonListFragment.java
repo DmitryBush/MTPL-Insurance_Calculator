@@ -1,4 +1,4 @@
-package com.bush.myapplication.person;
+package com.bush.myapplication.person.listview;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bush.myapplication.R;
 import com.bush.myapplication.databinding.PersonListFragmentBinding;
@@ -32,6 +32,18 @@ public class PersonListFragment extends Fragment
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
+        binding.addDriverButton.setOnClickListener(view1 ->
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.action_personListFragment_to_personFragment));
+
+        binding.prev.setOnClickListener(view1 ->
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.action_personListFragment_to_carFragment));
+
+        binding.next.setOnClickListener(view1 ->
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.action_personListFragment_to_insuranceFragment));
     }
 
     @Override

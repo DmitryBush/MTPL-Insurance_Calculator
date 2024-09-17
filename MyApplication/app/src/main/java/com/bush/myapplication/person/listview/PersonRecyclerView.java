@@ -1,4 +1,4 @@
-package com.bush.myapplication.person;
+package com.bush.myapplication.person.listview;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
+import com.bush.myapplication.person.Person;
 
 import java.util.List;
 

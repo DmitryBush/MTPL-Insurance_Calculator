@@ -1,4 +1,4 @@
-package com.bush.myapplication.person.button;
+package com.bush.myapplication.person.creation.button;
 
 import android.database.Cursor;
 import android.view.View;
@@ -10,7 +10,7 @@ import com.bush.myapplication.R;
 import com.bush.myapplication.button.ClickHandler;
 import com.bush.myapplication.database.Database;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
-import com.bush.myapplication.person.PersonCreationFragment;
+import com.bush.myapplication.person.creation.PersonCreationFragment;
 import com.bush.myapplication.person.builder.PersonBuilder;
 
 import java.time.LocalDate;
