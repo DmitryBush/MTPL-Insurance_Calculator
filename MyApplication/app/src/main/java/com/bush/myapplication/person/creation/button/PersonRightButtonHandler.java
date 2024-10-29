@@ -14,6 +14,7 @@ import com.bush.myapplication.person.creation.PersonCreationFragment;
 import com.bush.myapplication.person.builder.PersonBuilder;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 
 public class PersonRightButtonHandler implements ClickHandler, View.OnClickListener
 {
@@ -95,16 +96,19 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
     }
 
     @Override
-    public LocalDate ParseDate(String str)
+    public Calendar ParseDate(String str)
     {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(0);
         if (str.isEmpty())
-            return LocalDate.of(1900, 1, 1);
+            return calendar;
         else
         {
             String[] strArray = str.split("[.]");
 
-            return LocalDate.of(ParseIntegerText(strArray[2]), ParseIntegerText(strArray[1]),
-                    ParseIntegerText(strArray[0]));
+            calendar.set(Integer.parseInt(strArray[2]),
+                    Integer.parseInt(strArray[1]), Integer.parseInt(strArray[0]));
+            return calendar;
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.bush.myapplication.button;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
 public interface ClickHandler
 {
@@ -9,5 +9,5 @@ public interface ClickHandler
     public float ParseFloatText(String str);
     public boolean PearseBooleanValue(String str);
     public boolean PearseBooleanValue(int value);
-    public LocalDate ParseDate(String str);
+    public Calendar ParseDate(String str);
 }

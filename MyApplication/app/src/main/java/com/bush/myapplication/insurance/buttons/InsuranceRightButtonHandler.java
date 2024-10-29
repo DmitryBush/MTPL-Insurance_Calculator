@@ -10,7 +10,7 @@ import com.bush.myapplication.button.ClickHandler;
 import com.bush.myapplication.databinding.InsuranceFragmentBinding;
 import com.bush.myapplication.insurance.InsuranceFragment;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
 public class InsuranceRightButtonHandler implements ClickHandler, View.OnClickListener
 {
@@ -70,7 +70,7 @@ public class InsuranceRightButtonHandler implements ClickHandler, View.OnClickLi
     }
 
     @Override
-    public LocalDate ParseDate(String str) {
+    public Calendar ParseDate(String str) {
         return null;
     }
 }

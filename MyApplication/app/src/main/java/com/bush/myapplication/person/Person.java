@@ -6,6 +6,7 @@ import com.bush.myapplication.structures.tableCAE.TableCAE;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Calendar;
 
 public class Person
 {
@@ -14,7 +15,7 @@ public class Person
     private String name;
     private String surname;
     private int age;
-    private LocalDate drivingLicenseRelease;
+    private Calendar drivingLicenseRelease;
     private int region;
     private int city;
 
@@ -86,18 +87,19 @@ public class Person
         this.surname = surname;
     }
 
-    public LocalDate getDrivingLicenseRelease() {
+    public Calendar getDrivingLicenseRelease() {
         return drivingLicenseRelease;
     }
 
-    public void setDrivingLicenseRelease(LocalDate drivingLicenseRelease) {
+    public void setDrivingLicenseRelease(Calendar drivingLicenseRelease) {
         this.drivingLicenseRelease = drivingLicenseRelease;
         CalculateExperience();
     }
 
     private void CalculateExperience()
     {
-        experience = Period.between(drivingLicenseRelease, LocalDate.now()).getYears();
+        experience = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
+                - drivingLicenseRelease.get(Calendar.DAY_OF_YEAR);
     }
 
     public int getExperience() {

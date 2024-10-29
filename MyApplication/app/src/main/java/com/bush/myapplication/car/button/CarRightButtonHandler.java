@@ -11,7 +11,7 @@ import com.bush.myapplication.car.CarFragment;
 import com.bush.myapplication.car.builder.CarBuilder;
 import com.bush.myapplication.databinding.CarFragmentBinding;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
 public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
 {
@@ -70,7 +70,7 @@ public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
     }
 
     @Override
-    public LocalDate ParseDate(String str) {
+    public Calendar ParseDate(String str) {
         return null;
     }
 }

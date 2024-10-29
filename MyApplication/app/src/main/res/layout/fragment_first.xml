@@ -17,12 +17,13 @@
             android:id="@+id/decript"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/description"
             android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Title" />
 
@@ -30,7 +31,9 @@
             android:id="@+id/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="64dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/greetings"
             android:textAlignment="center"
             android:textSize="34sp"
@@ -44,14 +47,15 @@
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginEnd="150dp"
             android:layout_marginBottom="36dp"
             android:clickable="true"
             android:src="@mipmap/ic_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/decript"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

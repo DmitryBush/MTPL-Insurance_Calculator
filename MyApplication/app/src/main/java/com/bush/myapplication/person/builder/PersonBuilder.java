@@ -5,6 +5,7 @@ import android.content.Context;
 import com.bush.myapplication.person.Person;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 
 public class PersonBuilder
 {
@@ -30,7 +31,7 @@ public class PersonBuilder
         instance.setAge(age);
         return this;
     }
-    public PersonBuilder SetDateLicenseRelease(LocalDate date)
+    public PersonBuilder SetDateLicenseRelease(Calendar date)
     {
         instance.setDrivingLicenseRelease(date);
         return this;
