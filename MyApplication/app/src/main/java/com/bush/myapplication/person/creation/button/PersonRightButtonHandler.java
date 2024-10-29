@@ -50,12 +50,12 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
         }
         MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.nameInput.getText().toString())
                 .SetSurname(binding.surnameInput.getText().toString())
-                .SetAge(ParseIntegerText(binding.ageText.getText().toString()))
-                .SetDateLicenseRelease(ParseDate(binding.editTextDate.getText().toString()))
+                .SetAge(ParseIntegerText(binding.ageInput.getText().toString()))
+                .SetDateLicenseRelease(ParseDate(binding.dlInput.getText().toString()))
                 .SetRegion(binding.placeSpinner.getSelectedItemPosition())
                 .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
                 .SetTerritorialCoefficient(coefficient)
-                .SetAccidentRate(ParseFloatText(binding.KBMText.getText().toString()))
+                .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
                 .Build(fragment.getContext()));
 
         NavHostFragment.findNavController(fragment)
