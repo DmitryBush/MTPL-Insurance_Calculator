@@ -16,11 +16,10 @@
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/decript"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/decript"
@@ -161,8 +160,9 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginEnd="19dp"
+                android:layout_marginEnd="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/perDl"
                 app:layout_constraintTop_toBottomOf="@+id/ageText">
 
@@ -189,10 +189,11 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginEnd="34dp"
+                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="32dp"
                 app:layout_constraintBottom_toTopOf="@+id/placeConcrSpinner"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/perPlace"
                 app:layout_constraintTop_toBottomOf="@+id/dlText" />
 
@@ -200,8 +201,8 @@
                 android:id="@+id/placeConcrSpinner"
                 android:layout_width="210dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/kbmText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/placeSpinner" />
 
@@ -223,9 +224,11 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginEnd="29dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/perKBM"
                 app:layout_constraintTop_toBottomOf="@+id/placeConcrSpinner">
 
