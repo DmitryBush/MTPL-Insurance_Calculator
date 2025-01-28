@@ -1,5 +1,6 @@
 package com.bush.myapplication.person.creation.button;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.view.View;
 
@@ -13,8 +14,11 @@ import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
 import com.bush.myapplication.person.creation.PersonCreationFragment;
 import com.bush.myapplication.person.builder.PersonBuilder;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 
 public class PersonRightButtonHandler implements ClickHandler, View.OnClickListener
 {
@@ -50,14 +54,13 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
         }
         MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.nameInput.getText().toString())
                 .SetSurname(binding.surnameInput.getText().toString())
-                .SetAge(ParseIntegerText(binding.ageInput.getText().toString()))
+                .SetAge(ParseDate(binding.ageInput.getText().toString()))
                 .SetDateLicenseRelease(ParseDate(binding.dlInput.getText().toString()))
                 .SetRegion(binding.placeSpinner.getSelectedItemPosition())
                 .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
                 .SetTerritorialCoefficient(coefficient)
                 .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
                 .Build(fragment.getContext()));
-
         NavHostFragment.findNavController(fragment)
                 .navigate(R.id.action_personCreationFragment_to_personListFragment);
     }
@@ -71,9 +74,9 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
     public int ParseIntegerText(String str)
     {
         if (str.isEmpty())
-            return Integer.MIN_VALUE;
+            throw new RuntimeException();
         else
-            return Integer.parseInt(str.toString());
+            return Integer.valueOf(str.toString());
     }
 
     @Override
@@ -100,15 +103,16 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
     {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(0);
-        if (str.isEmpty())
-            return calendar;
-        else
-        {
-            String[] strArray = str.split("[.]");
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
-            calendar.set(Integer.parseInt(strArray[2]),
-                    Integer.parseInt(strArray[1]), Integer.parseInt(strArray[0]));
+        try {
+            Date date = formatter.parse(str);
+
+            calendar.setTime(date);
             return calendar;
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 }

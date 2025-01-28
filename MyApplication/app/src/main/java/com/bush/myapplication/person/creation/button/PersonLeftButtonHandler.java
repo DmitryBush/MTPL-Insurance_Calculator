@@ -18,47 +18,47 @@ import java.util.Calendar;
 
 public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListener
 {
-    private PersonCreationFragmentBinding binding;
+//    private PersonCreationFragmentBinding binding;
     private PersonCreationFragment fragment;
-    private PersonBuilder personBuilder;
-    private Database database;
+//    private PersonBuilder personBuilder;
+//    private Database database;
 
     public PersonLeftButtonHandler(PersonCreationFragmentBinding binding,
                                     PersonCreationFragment fragment, PersonBuilder personBuilder,
                                     Database database)
     {
-        this.binding = binding;
+//        this.binding = binding;
         this.fragment = fragment;
-        this.personBuilder = personBuilder;
-        this.database = database;
+//        this.personBuilder = personBuilder;
+//        this.database = database;
     }
 
     @Override
     public void OnClickHandler()
     {
-        float coefficient = 0;
-        Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
-                "FROM cities left join Place on Place.id = "
-                + (binding.placeSpinner.getSelectedItemPosition() + 1) +
-                " AND cities.subject = " + (binding.placeSpinner.getSelectedItemPosition() + 1)
-                + " WHERE Place.Subject is NOT NULL");
-
-        if (cursor.moveToFirst())
-        {
-            cursor.move(binding.placeConcrSpinner.getSelectedItemPosition());
-            coefficient = cursor.getFloat(3);
-        }
-
-        MTPL.GetInstance().AppendPerson(personBuilder
-                     .SetName(binding.nameInput.getText().toString())
-                     .SetSurname(binding.surnameInput.getText().toString())
-                     .SetAge(ParseIntegerText(binding.ageInput.getText().toString()))
-                     .SetDateLicenseRelease(ParseDate(binding.dlInput.getText().toString()))
-                     .SetRegion(binding.placeSpinner.getSelectedItemPosition())
-                     .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
-                     .SetTerritorialCoefficient(coefficient)
-                     .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
-                     .Build(fragment.getContext()));
+//        float coefficient = 0;
+//        Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
+//                "FROM cities left join Place on Place.id = "
+//                + (binding.placeSpinner.getSelectedItemPosition() + 1) +
+//                " AND cities.subject = " + (binding.placeSpinner.getSelectedItemPosition() + 1)
+//                + " WHERE Place.Subject is NOT NULL");
+//
+//        if (cursor.moveToFirst())
+//        {
+//            cursor.move(binding.placeConcrSpinner.getSelectedItemPosition());
+//            coefficient = cursor.getFloat(3);
+//        }
+//
+//        MTPL.GetInstance().AppendPerson(personBuilder
+//                     .SetName(binding.nameInput.getText().toString())
+//                     .SetSurname(binding.surnameInput.getText().toString())
+//                     .SetAge(ParseIntegerText(binding.ageInput.getText().toString()))
+//                     .SetDateLicenseRelease(ParseDate(binding.dlInput.getText().toString()))
+//                     .SetRegion(binding.placeSpinner.getSelectedItemPosition())
+//                     .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
+//                     .SetTerritorialCoefficient(coefficient)
+//                     .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
+//                     .Build(fragment.getContext()));
 
         NavHostFragment.findNavController(fragment)
                 .navigate(R.id.action_personFragment_to_carFragment);

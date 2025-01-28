@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.bush.myapplication.structures.tableCAE.TableCAE;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.Calendar;
 
 public class Person
@@ -26,16 +24,16 @@ public class Person
 
     public Person()
     {
-        name = new String();
-        surname = new String();
+        name = null;
+        surname = null;
         drivingLicenseRelease = null;
 
-        age = Integer.MIN_VALUE;
+        age = 0;
         region = 0;
         city = 0;
         territorialCoefficient = 0;
         accidentRate = 0;
-        experience = Integer.MIN_VALUE;
+        experience = 0;
         CAECoefficient = 0;
     }
 
@@ -59,8 +57,11 @@ public class Person
         return region;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setAge(Calendar age) {
+        this.age = Calendar.getInstance().get(Calendar.YEAR) - age.get(Calendar.YEAR);
+
+        if (Calendar.getInstance().get(Calendar.DAY_OF_YEAR) < age.get(Calendar.DAY_OF_YEAR))
+            this.age--;
     }
 
     public void setRegion(int region) {
@@ -98,8 +99,12 @@ public class Person
 
     private void CalculateExperience()
     {
-        experience = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
-                - drivingLicenseRelease.get(Calendar.DAY_OF_YEAR);
+        experience = Calendar.getInstance().get(Calendar.YEAR)
+                - drivingLicenseRelease.get(Calendar.YEAR);
+
+        if (Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
+                < drivingLicenseRelease.get(Calendar.DAY_OF_YEAR))
+            experience--;
     }
 
     public int getExperience() {

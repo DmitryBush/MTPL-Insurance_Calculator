@@ -26,7 +26,7 @@ public class PersonBuilder
         instance.setSurname(surname);
         return this;
     }
-    public PersonBuilder SetAge(int age)
+    public PersonBuilder SetAge(Calendar age)
     {
         instance.setAge(age);
         return this;
@@ -58,8 +58,32 @@ public class PersonBuilder
     }
     public Person Build(Context context)
     {
-        if (instance.getAge() != Integer.MIN_VALUE && instance.getExperience() != Float.MIN_VALUE)
-            instance.CalculateCAECoefficient(context);
+        if (instance.getName() == null || instance.getName().isEmpty()) {
+            throw new IllegalStateException("Name is required");
+        }
+        if (instance.getSurname() == null || instance.getSurname().isEmpty()) {
+            throw new IllegalStateException("Surname is required");
+        }
+        if (instance.getAge() < 18 || instance.getAge() > 150) {
+            throw new IllegalStateException("Age must be between 18 and 150, not: " + instance.getAge());
+        }
+        if (instance.getDrivingLicenseRelease() == null || instance.getDrivingLicenseRelease().after(Calendar.getInstance())) {
+            throw new IllegalStateException("Driving license release date is invalid");
+        }
+        if (instance.getRegion() <= 0) {
+            throw new IllegalStateException("Region must be a positive number");
+        }
+        if (instance.getCity() <= 0) {
+            throw new IllegalStateException("City must be a positive number");
+        }
+        if (instance.getTerritorialCoefficient() < 0 || instance.getTerritorialCoefficient() > 2.5f) {
+            throw new IllegalStateException("Territorial Coefficient must be between 0 and 2.5");
+        }
+        if (instance.getAccidentRate() < 0) {
+            throw new IllegalStateException("Accident rate cannot be negative");
+        }
+        instance.CalculateCAECoefficient(context);
+
         return instance;
     }
 }

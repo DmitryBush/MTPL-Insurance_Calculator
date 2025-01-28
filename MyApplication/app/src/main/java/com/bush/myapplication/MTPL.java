@@ -1,10 +1,7 @@
 package com.bush.myapplication;
 
-import android.content.Context;
-
 import com.bush.myapplication.car.Car;
 import com.bush.myapplication.person.Person;
-import com.bush.myapplication.structures.tableCAE.TableCAE;
 
 import java.util.LinkedList;
 import java.util.List;

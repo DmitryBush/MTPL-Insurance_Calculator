@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="76dp"
                 android:text="@string/personAge"
                 app:layout_constraintBottom_toTopOf="@+id/perDl"
                 app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +141,10 @@
                     android:id="@+id/ageInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/personAge" />
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:hint="@string/personAge"
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -161,6 +164,8 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="24dp"
+                android:clickable="true"
+                android:enabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/perDl"
@@ -170,7 +175,14 @@
                     android:id="@+id/dlInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/personDateReleaseDL" />
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:editable="true"
+                    android:enabled="true"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/personDateReleaseDL"
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -178,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="68dp"
                 android:text="@string/personPlace"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/perDl" />
@@ -191,6 +203,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="32dp"
+                android:spinnerMode="dialog"
                 app:layout_constraintBottom_toTopOf="@+id/placeConcrSpinner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -202,6 +215,7 @@
                 android:layout_width="210dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="24dp"
+                android:spinnerMode="dialog"
                 app:layout_constraintBottom_toTopOf="@+id/kbmText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/placeSpinner" />
@@ -236,7 +250,10 @@
                     android:id="@+id/kbmInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/personKBM" />
+                    android:enabled="true"
+                    android:hint="@string/personKBM"
+                    android:inputType="number|numberDecimal"
+                    android:onClick="setDate" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -250,7 +267,7 @@
         android:layout_marginEnd="135dp"
         android:layout_marginBottom="32dp"
         android:clickable="true"
-        android:src="@mipmap/ic_next"
+        android:src="@mipmap/ic_true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/prev"
@@ -265,7 +282,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
         android:clickable="true"
-        android:src="@mipmap/ic_prev"
+        android:src="@mipmap/ic_no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next"
         app:layout_constraintStart_toStartOf="parent"

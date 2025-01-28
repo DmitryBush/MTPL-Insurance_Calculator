@@ -26,9 +26,8 @@ public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
     @Override
     public void OnClickHandler()
     {
-        System.out.println(ParseIntegerText(binding.editTextNumberSigned.getText().toString()));
         MTPL.GetInstance().SetCar(new CarBuilder()
-                .SetPower(ParseIntegerText(binding.editTextNumberSigned.getText().toString()))
+                .SetPower(ParseIntegerText(binding.powerInput.getText().toString()))
                 .SetCarType(binding.carTypeSpinner.getSelectedItemPosition())
                 .Build());
 

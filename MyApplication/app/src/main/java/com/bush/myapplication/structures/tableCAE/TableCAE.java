@@ -54,6 +54,6 @@ public class TableCAE
             if (i.matches(age, experience))
                 return i.coefficient;
         }
-        return 0;
+        throw new RuntimeException(String.format("Incorrect ratio:\nage: %d\nexperience: %d", age, experience));
     }
 }

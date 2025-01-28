@@ -56,7 +56,7 @@ public class CarFragment extends Fragment
     private void LoadSavedData()
     {
         if (MTPL.GetInstance().getCar().getPower() != 0)
-            binding.editTextNumberSigned.setText(
+            binding.powerInput.setText(
                     String.valueOf(MTPL.GetInstance().getCar().getPower()));
         binding.carTypeSpinner.setSelection(MTPL.GetInstance().getCar().getCarType());
     }
