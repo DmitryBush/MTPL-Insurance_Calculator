@@ -1,6 +1,7 @@
 package com.bush.myapplication.person.creation;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bush.myapplication.R;
 import com.bush.myapplication.database.Database;
 import com.bush.myapplication.database.SQLCommands;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
@@ -42,12 +44,17 @@ public class PersonCreationFragment extends Fragment
 
             binding.nameInput.setText(driver.getName());
             binding.surnameInput.setText(driver.getSurname());
-            //binding.ageInput.setText();
-            Calendar tmp = driver.getDrivingLicenseRelease();
+
+            Calendar tmpDate = driver.getBirthdayDate();
+            binding.ageInput.setText(String.format("%02d.%02d.%02d",
+                    tmpDate.get(Calendar.DAY_OF_MONTH),
+                    tmpDate.get(Calendar.MONTH),
+                    tmpDate.get(Calendar.YEAR)));
+            tmpDate = driver.getDrivingLicenseRelease();
             binding.dlInput.setText(String.format("%02d.%02d.%02d",
-                    tmp.get(Calendar.DAY_OF_MONTH),
-                    tmp.get(Calendar.MONTH),
-                    tmp.get(Calendar.YEAR)));
+                    tmpDate.get(Calendar.DAY_OF_MONTH),
+                    tmpDate.get(Calendar.MONTH),
+                    tmpDate.get(Calendar.YEAR)));
 
 
             binding.placeSpinner.setAdapter(database.ExecuteSQL(SQLCommands.Select,

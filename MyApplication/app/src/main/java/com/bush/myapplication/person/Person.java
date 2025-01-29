@@ -53,6 +53,7 @@ public class Person implements Serializable
             age--;
         return age;
     }
+    public Calendar getBirthdayDate() {return birthdayDate;}
 
     public int getCity() {
         return city;
