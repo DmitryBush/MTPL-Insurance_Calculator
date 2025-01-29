@@ -25,29 +25,25 @@ public class PersonPlaceActivity implements AdapterView.OnItemSelectedListener
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
+        System.out.println("Place selected");
         binding.placeConcrSpinner.setAdapter(
                 database.ExecuteSQL(
                         "select cities.id as _id, * " +
                                 "FROM cities left join Place on Place.id = " + (i + 1) +
                                 " AND cities.subject = " + (i + 1) + " WHERE Place.Subject is NOT NULL",
                         new String[]{"city", "subject"}));
+        binding.placeConcrSpinner.setSelection(2);
 
-        Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
-                "FROM cities left join Place on Place.id = " + (i + 1) +
-                " AND cities.subject = " + (i + 1) + " WHERE Place.Subject is NOT NULL");
-        if (cursor.moveToFirst())
-        {
-            cursor.move(0);
-            personBuilder.SetRegion(i).SetCity(0).SetTerritorialCoefficient(cursor.getFloat(3));
-            //System.out.println(cursor.getFloat(3));
-        }
+//        Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
+//                "FROM cities left join Place on Place.id = " + (i + 1) +
+//                " AND cities.subject = " + (i + 1) + " WHERE Place.Subject is NOT NULL");
+//        if (cursor.moveToFirst())
+//        {
 //            cursor.move(0);
-//        System.out.println(cursor.getFloat(3));
+//            personBuilder.SetRegion(i).SetCity(0).SetTerritorialCoefficient(cursor.getFloat(3));
+//        }
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView)
-    {
-
-    }
+    public void onNothingSelected(AdapterView<?> adapterView) {}
 }

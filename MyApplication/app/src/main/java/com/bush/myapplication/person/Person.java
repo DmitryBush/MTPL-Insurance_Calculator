@@ -1,12 +1,18 @@
 package com.bush.myapplication.person;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 
 import com.bush.myapplication.structures.tableCAE.TableCAE;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Person
+public class Person implements Serializable
 {
     private static volatile TableCAE tableCAE = null;
 
@@ -140,5 +146,44 @@ public class Person
             }
         }
         CAECoefficient = tableCAE.GetCoefficient(age, experience);
+    }
+
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+
+//    @Override
+//    public void writeToParcel(@NonNull Parcel parcel, int i) {
+//        parcel.writeString(name);
+//        parcel.writeString(surname);
+//        parcel.writeInt(age);
+//        parcel.writeInt(region);
+//        parcel.writeInt(city);
+//        parcel.writeFloat(CAECoefficient);
+//        parcel.writeFloat(territorialCoefficient);
+//        parcel.writeFloat(accidentRate);
+//        parcel.writeInt(experience);
+//        parcel.writeSerializable(drivingLicenseRelease);
+//    }
+
+    @SuppressLint("DefaultLocale")
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", drivingLicenseRelease=" + String.format("%02d.%02d.%02d",
+                drivingLicenseRelease.get(Calendar.DAY_OF_MONTH),
+                drivingLicenseRelease.get(Calendar.MONTH),
+                drivingLicenseRelease.get(Calendar.YEAR)) +
+                ", region=" + region +
+                ", city=" + city +
+                ", CAECoefficient=" + CAECoefficient +
+                ", territorialCoefficient=" + territorialCoefficient +
+                ", accidentRate=" + accidentRate +
+                ", experience=" + experience +
+                '}';
     }
 }

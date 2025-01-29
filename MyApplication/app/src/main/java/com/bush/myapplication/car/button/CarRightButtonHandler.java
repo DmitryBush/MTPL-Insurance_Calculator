@@ -2,14 +2,17 @@ package com.bush.myapplication.car.button;
 
 import android.view.View;
 
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
 import com.bush.myapplication.button.ClickHandler;
 import com.bush.myapplication.car.CarFragment;
+import com.bush.myapplication.car.CarFragmentDirections;
 import com.bush.myapplication.car.builder.CarBuilder;
 import com.bush.myapplication.databinding.CarFragmentBinding;
+import com.bush.myapplication.person.Person;
 
 import java.util.Calendar;
 
@@ -34,9 +37,11 @@ public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
         if (MTPL.GetInstance().getPersonList().size() > 0)
             NavHostFragment.findNavController(fragment)
                     .navigate(R.id.action_carFragment_to_personListFragment);
-        else
-            NavHostFragment.findNavController(fragment)
-                    .navigate(R.id.action_carFragment_to_personFragment);
+        else {
+            NavDirections action = CarFragmentDirections
+                    .actionCarFragmentToPersonFragment(null);
+            NavHostFragment.findNavController(fragment).navigate(action);
+        }
     }
 
     @Override

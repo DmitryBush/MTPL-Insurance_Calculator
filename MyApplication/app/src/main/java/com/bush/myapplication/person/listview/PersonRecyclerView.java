@@ -18,6 +18,15 @@ import java.util.List;
 public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.MyViewHolder>
 {
     private List<Person> personList = MTPL.GetInstance().getPersonList();
+    private final OnItemClickListener itemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public PersonRecyclerView(OnItemClickListener listener) {
+        this.itemClickListener = listener;
+    }
 
     @NonNull
     @Override
@@ -59,6 +68,14 @@ public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.
 
             nameSurname = itemView.findViewById(R.id.nameSurname);
             aboutPerson = itemView.findViewById(R.id.aboutPerson);
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClickListener.onItemClick(position);
+                }
+            });
         }
     }
+
 }
