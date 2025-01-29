@@ -11,6 +11,7 @@ import com.bush.myapplication.R;
 import com.bush.myapplication.button.ClickHandler;
 import com.bush.myapplication.database.Database;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
+import com.bush.myapplication.person.Person;
 import com.bush.myapplication.person.creation.PersonCreationFragment;
 import com.bush.myapplication.person.builder.PersonBuilder;
 
@@ -24,43 +25,41 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
 {
     private PersonCreationFragmentBinding binding;
     private PersonCreationFragment fragment;
-    private PersonBuilder personBuilder;
-    private Database database;
+    private Person driver;
 
     public PersonRightButtonHandler(PersonCreationFragmentBinding binding,
-                                   PersonCreationFragment fragment, PersonBuilder personBuilder,
-                                    Database database)
+                                   PersonCreationFragment fragment,
+                                   Person driver)
     {
         this.binding = binding;
         this.fragment = fragment;
-        this.personBuilder = personBuilder;
-        this.database = database;
+        this.driver = driver;
     }
 
     @Override
     public void OnClickHandler()
     {
-        float coefficient = 0;
-        Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
-                "FROM cities left join Place on Place.id = "
-                + (binding.placeSpinner.getSelectedItemPosition() + 1) +
-                " AND cities.subject = " + (binding.placeSpinner.getSelectedItemPosition() + 1)
-                + " WHERE Place.Subject is NOT NULL");
-
-        if (cursor.moveToFirst())
-        {
-            cursor.move(binding.placeConcrSpinner.getSelectedItemPosition());
-            coefficient = cursor.getFloat(3);
-        }
-        MTPL.GetInstance().AppendPerson(personBuilder.SetName(binding.nameInput.getText().toString())
-                .SetSurname(binding.surnameInput.getText().toString())
-                .SetAge(ParseDate(binding.ageInput.getText().toString()))
-                .SetDateLicenseRelease(ParseDate(binding.dlInput.getText().toString()))
-                .SetRegion(binding.placeSpinner.getSelectedItemPosition())
-                .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
-                .SetTerritorialCoefficient(coefficient)
-                .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
-                .Build(fragment.getContext()));
+        if (driver != null)
+            MTPL.GetInstance().setDriver(MTPL.GetInstance().getPersonIndex(driver),
+                            new PersonBuilder(driver)
+                                    .SetName(binding.nameInput.getText().toString())
+                                    .SetSurname(binding.surnameInput.getText().toString())
+                                    .SetAge(ParseDate(binding.ageInput.getText().toString()))
+                                    .SetDateLicenseRelease(ParseDate(binding.dlInput.getText().toString()))
+                                    .SetRegion(binding.placeSpinner.getSelectedItemPosition())
+                                    .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
+                                    .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
+                                    .Build(fragment.getContext()));
+        else
+            MTPL.GetInstance().AppendPerson(new PersonBuilder()
+                    .SetName(binding.nameInput.getText().toString())
+                    .SetSurname(binding.surnameInput.getText().toString())
+                    .SetAge(ParseDate(binding.ageInput.getText().toString()))
+                    .SetDateLicenseRelease(ParseDate(binding.dlInput.getText().toString()))
+                    .SetRegion(binding.placeSpinner.getSelectedItemPosition())
+                    .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
+                    .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
+                    .Build(fragment.getContext()));
         NavHostFragment.findNavController(fragment)
                 .navigate(R.id.action_personCreationFragment_to_personListFragment);
     }

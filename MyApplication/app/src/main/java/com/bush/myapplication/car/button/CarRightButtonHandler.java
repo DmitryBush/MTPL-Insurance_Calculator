@@ -34,7 +34,7 @@ public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
                 .SetCarType(binding.carTypeSpinner.getSelectedItemPosition())
                 .Build());
 
-        if (MTPL.GetInstance().getPersonList().size() > 0)
+        if (MTPL.GetInstance().getPersonListSize() > 0)
             NavHostFragment.findNavController(fragment)
                     .navigate(R.id.action_carFragment_to_personListFragment);
         else {

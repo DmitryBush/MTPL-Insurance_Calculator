@@ -17,7 +17,6 @@ import java.util.List;
 
 public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.MyViewHolder>
 {
-    private List<Person> personList = MTPL.GetInstance().getPersonList();
     private final OnItemClickListener itemClickListener;
 
     public interface OnItemClickListener {
@@ -43,20 +42,20 @@ public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
         holder.nameSurname.setText(
-                MTPL.GetInstance().getPersonList().get(position).getName() + " " +
-                        MTPL.GetInstance().getPersonList().get(position).getSurname());
+                MTPL.GetInstance().getDriver(position).getName() + " " +
+                        MTPL.GetInstance().getDriver(position).getSurname());
         holder.aboutPerson.setText("Территориальный коэффицент: "
-                + MTPL.GetInstance().getPersonList().get(position).getTerritorialCoefficient()
+                + MTPL.GetInstance().getDriver(position).getTerritorialCoefficient()
                 + ", Коэффицент КБС: "
-                + MTPL.GetInstance().getPersonList().get(position).getAccidentRate()
+                + MTPL.GetInstance().getDriver(position).getAccidentRate()
                 + ", Коэффицент КВС: "
-                + MTPL.GetInstance().getPersonList().get(position).getCAECoefficient());
+                + MTPL.GetInstance().getDriver(position).getCAECoefficient());
     }
 
     @Override
     public int getItemCount()
     {
-        return personList.size();
+        return MTPL.GetInstance().getPersonListSize();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder

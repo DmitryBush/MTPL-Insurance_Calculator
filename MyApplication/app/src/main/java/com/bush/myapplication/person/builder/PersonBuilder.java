@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.bush.myapplication.person.Person;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 
 public class PersonBuilder
@@ -14,6 +13,10 @@ public class PersonBuilder
     public PersonBuilder()
     {
         instance = new Person();
+    }
+
+    public PersonBuilder(Person instance) {
+        this.instance = instance;
     }
 
     public PersonBuilder SetName(String name)
@@ -28,7 +31,7 @@ public class PersonBuilder
     }
     public PersonBuilder SetAge(Calendar age)
     {
-        instance.setAge(age);
+        instance.setBirthdayDate(age);
         return this;
     }
     public PersonBuilder SetDateLicenseRelease(Calendar date)
@@ -44,11 +47,6 @@ public class PersonBuilder
     public PersonBuilder SetCity(int city)
     {
         instance.setCity(city);
-        return this;
-    }
-    public PersonBuilder SetTerritorialCoefficient(float coefficient)
-    {
-        instance.setTerritorialCoefficient(coefficient);
         return this;
     }
     public PersonBuilder SetAccidentRate(float rate)
@@ -76,13 +74,11 @@ public class PersonBuilder
         if (instance.getCity() <= 0) {
             throw new IllegalStateException("City must be a positive number");
         }
-        if (instance.getTerritorialCoefficient() < 0 || instance.getTerritorialCoefficient() > 2.5f) {
-            throw new IllegalStateException("Territorial Coefficient must be between 0 and 2.5");
-        }
         if (instance.getAccidentRate() < 0) {
             throw new IllegalStateException("Accident rate cannot be negative");
         }
         instance.CalculateCAECoefficient(context);
+        instance.CalculateTerritorialCoefficient(context);
 
         return instance;
     }

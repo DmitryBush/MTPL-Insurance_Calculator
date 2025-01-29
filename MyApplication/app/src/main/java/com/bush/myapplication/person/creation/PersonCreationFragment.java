@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,7 +16,6 @@ import com.bush.myapplication.person.Person;
 import com.bush.myapplication.person.creation.button.AgeDatePicker;
 import com.bush.myapplication.person.creation.button.LicenseDatePicker;
 import com.bush.myapplication.person.creation.spinner.PersonPlaceActivity;
-import com.bush.myapplication.person.builder.PersonBuilder;
 import com.bush.myapplication.person.creation.button.PersonLeftButtonHandler;
 import com.bush.myapplication.person.creation.button.PersonRightButtonHandler;
 
@@ -35,12 +33,11 @@ public class PersonCreationFragment extends Fragment
     {
         binding = PersonCreationFragmentBinding.inflate(inflater, container, false);
         PersonCreationFragmentArgs args = PersonCreationFragmentArgs.fromBundle(getArguments());
-        //Person driver = args.getDriver();
+
         Database database = new Database(getContext(), "RussianSubjects.db");
-        PersonBuilder human = new PersonBuilder();
+        Person driver = args.getDriver();
 
         try {
-            Person driver = args.getDriver();
             System.out.println(driver);
 
             binding.nameInput.setText(driver.getName());
@@ -51,17 +48,7 @@ public class PersonCreationFragment extends Fragment
                     tmp.get(Calendar.DAY_OF_MONTH),
                     tmp.get(Calendar.MONTH),
                     tmp.get(Calendar.YEAR)));
-            binding.placeConcrSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    System.out.println("Item selected: " + position);
-                }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    System.out.println("Nothing selected");
-                }
-            });
 
             binding.placeSpinner.setAdapter(database.ExecuteSQL(SQLCommands.Select,
                     "Place", new String[]{"Subject"}));
@@ -69,25 +56,19 @@ public class PersonCreationFragment extends Fragment
 
             binding.kbmInput.setText(new Float(driver.getAccidentRate()).toString());
             binding.placeSpinner.setOnItemSelectedListener(
-                    new PersonPlaceActivity(binding, database, human));
+                    new PersonPlaceActivity(binding, database, driver));
         } catch (NullPointerException e) {
             System.out.println("NullPointerException");
             binding.placeSpinner.setAdapter(database.ExecuteSQL(SQLCommands.Select,
                 "Place", new String[]{"Subject"}));
-//            binding.placeSpinner.setOnItemSelectedListener(
-//                    new PersonPlaceActivity(binding, database, human));
 
             binding.placeSpinner.setOnItemSelectedListener(
-                    new PersonPlaceActivity(binding, database, human));
+                    new PersonPlaceActivity(binding, database, null));
         }
         finally {
-//            binding.placeSpinner.setOnItemSelectedListener(
-//                    new PersonPlaceActivity(binding, database, human));
-
-            binding.prev.setOnClickListener(new PersonLeftButtonHandler(binding, this,
-                    human, database));
+            binding.prev.setOnClickListener(new PersonLeftButtonHandler(this, driver));
             binding.next.setOnClickListener(new PersonRightButtonHandler(binding, this,
-                    human, database));
+                    driver));
 
 
             binding.dlInput.setOnClickListener(new LicenseDatePicker(getActivity(), binding));

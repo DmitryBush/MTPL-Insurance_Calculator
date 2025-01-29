@@ -62,7 +62,7 @@ public class PersonListFragment extends Fragment implements PersonRecyclerView.O
     public void onItemClick(int position) {
         NavDirections action = PersonListFragmentDirections
                 .actionPersonListFragmentToPersonFragment(
-                        MTPL.GetInstance().getPersonList().get(position));
+                        MTPL.GetInstance().getDriver(position));
         NavHostFragment.findNavController(this).navigate(action);
     }
 }

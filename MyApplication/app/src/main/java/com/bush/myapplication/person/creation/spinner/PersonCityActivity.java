@@ -8,6 +8,7 @@ import com.bush.myapplication.database.Database;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
 import com.bush.myapplication.person.builder.PersonBuilder;
 
+@Deprecated
 public class PersonCityActivity implements AdapterView.OnItemSelectedListener
 {
     private PersonCreationFragmentBinding binding;
@@ -27,11 +28,11 @@ public class PersonCityActivity implements AdapterView.OnItemSelectedListener
         Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
                 "FROM cities left join Place on Place.id = " + (i + 1) +
                 " AND cities.subject = " + (i + 1) + " WHERE Place.Subject is NOT NULL");
-        if (cursor.moveToFirst())
-        {
-            cursor.move(i);
-            personBuilder.SetCity(i).SetTerritorialCoefficient(cursor.getFloat(3));
-        }
+//        if (cursor.moveToFirst())
+//        {
+//            cursor.move(i);
+//            personBuilder.SetCity(i).SetTerritorialCoefficient(cursor.getFloat(3));
+//        }
     }
 
     @Override

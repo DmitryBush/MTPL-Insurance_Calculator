@@ -10,6 +10,7 @@ import com.bush.myapplication.R;
 import com.bush.myapplication.button.ClickHandler;
 import com.bush.myapplication.database.Database;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
+import com.bush.myapplication.person.Person;
 import com.bush.myapplication.person.creation.PersonCreationFragment;
 import com.bush.myapplication.person.builder.PersonBuilder;
 
@@ -18,50 +19,24 @@ import java.util.Calendar;
 
 public class PersonLeftButtonHandler implements ClickHandler, View.OnClickListener
 {
-//    private PersonCreationFragmentBinding binding;
     private PersonCreationFragment fragment;
-//    private PersonBuilder personBuilder;
-//    private Database database;
+    private Person driver;
 
-    public PersonLeftButtonHandler(PersonCreationFragmentBinding binding,
-                                    PersonCreationFragment fragment, PersonBuilder personBuilder,
-                                    Database database)
+    public PersonLeftButtonHandler(PersonCreationFragment fragment, Person driver)
     {
-//        this.binding = binding;
         this.fragment = fragment;
-//        this.personBuilder = personBuilder;
-//        this.database = database;
+        this.driver = driver;
     }
 
     @Override
     public void OnClickHandler()
     {
-//        float coefficient = 0;
-//        Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
-//                "FROM cities left join Place on Place.id = "
-//                + (binding.placeSpinner.getSelectedItemPosition() + 1) +
-//                " AND cities.subject = " + (binding.placeSpinner.getSelectedItemPosition() + 1)
-//                + " WHERE Place.Subject is NOT NULL");
-//
-//        if (cursor.moveToFirst())
-//        {
-//            cursor.move(binding.placeConcrSpinner.getSelectedItemPosition());
-//            coefficient = cursor.getFloat(3);
-//        }
-//
-//        MTPL.GetInstance().AppendPerson(personBuilder
-//                     .SetName(binding.nameInput.getText().toString())
-//                     .SetSurname(binding.surnameInput.getText().toString())
-//                     .SetAge(ParseIntegerText(binding.ageInput.getText().toString()))
-//                     .SetDateLicenseRelease(ParseDate(binding.dlInput.getText().toString()))
-//                     .SetRegion(binding.placeSpinner.getSelectedItemPosition())
-//                     .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
-//                     .SetTerritorialCoefficient(coefficient)
-//                     .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
-//                     .Build(fragment.getContext()));
-
-        NavHostFragment.findNavController(fragment)
-                .navigate(R.id.action_personFragment_to_carFragment);
+        if (driver != null)
+            NavHostFragment.findNavController(fragment)
+                            .navigate(R.id.action_personCreationFragment_to_personListFragment);
+        else
+            NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_personFragment_to_carFragment);
     }
 
     @Override
