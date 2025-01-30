@@ -2,6 +2,8 @@ package com.bush.myapplication.person.creation;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,9 @@ import com.bush.myapplication.person.creation.button.LicenseDatePicker;
 import com.bush.myapplication.person.creation.spinner.PersonPlaceActivity;
 import com.bush.myapplication.person.creation.button.PersonLeftButtonHandler;
 import com.bush.myapplication.person.creation.button.PersonRightButtonHandler;
+import com.bush.myapplication.validator.DateValidator;
+import com.bush.myapplication.validator.FloatValidator;
+import com.bush.myapplication.validator.TextValidator;
 
 import java.text.SimpleDateFormat;
 
@@ -73,6 +78,13 @@ public class PersonCreationFragment extends Fragment
 
             binding.dlInput.setOnClickListener(new LicenseDatePicker(getActivity(), binding));
             binding.ageInput.setOnClickListener(new AgeDatePicker(getActivity(), binding));
+
+            binding.nameInput.addTextChangedListener(new TextValidator(binding.nameText));
+            binding.surnameInput.addTextChangedListener(new TextValidator(binding.surnameText));
+
+            binding.ageInput.addTextChangedListener(new DateValidator(binding.ageText));
+            binding.dlInput.addTextChangedListener(new DateValidator(binding.dlText));
+            binding.kbmInput.addTextChangedListener(new FloatValidator(binding.kbmText));
         }
         return binding.getRoot();
     }
