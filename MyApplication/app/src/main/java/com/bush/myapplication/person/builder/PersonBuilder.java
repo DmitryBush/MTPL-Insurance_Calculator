@@ -1,10 +1,19 @@
 package com.bush.myapplication.person.builder;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.bush.myapplication.person.Person;
+import com.bush.myapplication.person.exception.AccidentRateException;
+import com.bush.myapplication.person.exception.AgeDriverException;
+import com.bush.myapplication.person.exception.DrivingLicenseException;
+import com.bush.myapplication.person.exception.NameDriverException;
+import com.bush.myapplication.person.exception.SurnameDriverException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class PersonBuilder
 {
@@ -29,14 +38,34 @@ public class PersonBuilder
         instance.setSurname(surname);
         return this;
     }
-    public PersonBuilder SetAge(Calendar age)
-    {
-        instance.setBirthdayDate(age);
+    public PersonBuilder SetAge(String age) throws AgeDriverException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(0);
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+
+        try {
+            Date date = formatter.parse(age);
+            calendar.setTime(date);
+            instance.setBirthdayDate(calendar);
+        } catch (ParseException e) {
+            throw new AgeDriverException("Date is invalid for parsing");
+        }
         return this;
     }
-    public PersonBuilder SetDateLicenseRelease(Calendar date)
-    {
-        instance.setDrivingLicenseRelease(date);
+    public PersonBuilder SetDateLicenseRelease(String drivingLicense) throws DrivingLicenseException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(0);
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+
+        try {
+            Date date = formatter.parse(drivingLicense);
+            calendar.setTime(date);
+            instance.setDrivingLicenseRelease(calendar);
+        } catch (ParseException e) {
+            throw new DrivingLicenseException("Date is invalid for parsing");
+        }
         return this;
     }
     public PersonBuilder SetRegion(int region)
@@ -54,19 +83,18 @@ public class PersonBuilder
         instance.setAccidentRate(rate);
         return this;
     }
-    public Person Build(Context context)
-    {
+    public Person Build(Context context) throws NameDriverException, SurnameDriverException, AgeDriverException, DrivingLicenseException, AccidentRateException {
         if (instance.getName() == null || instance.getName().isEmpty()) {
-            throw new IllegalStateException("Name is required");
+            throw new NameDriverException("Name is required");
         }
         if (instance.getSurname() == null || instance.getSurname().isEmpty()) {
-            throw new IllegalStateException("Surname is required");
+            throw new SurnameDriverException("Surname is required");
         }
         if (instance.getAge() < 18 || instance.getAge() > 150) {
-            throw new IllegalStateException("Age must be between 18 and 150, not: " + instance.getAge());
+            throw new AgeDriverException("Age must be between 18 and 150, not: " + instance.getAge());
         }
         if (instance.getDrivingLicenseRelease() == null || instance.getDrivingLicenseRelease().after(Calendar.getInstance())) {
-            throw new IllegalStateException("Driving license release date is invalid");
+            throw new DrivingLicenseException("Driving license release date is invalid");
         }
         if (instance.getRegion() <= 0) {
             throw new IllegalStateException("Region must be a positive number");
@@ -75,7 +103,7 @@ public class PersonBuilder
             throw new IllegalStateException("City must be a positive number");
         }
         if (instance.getAccidentRate() < 0) {
-            throw new IllegalStateException("Accident rate cannot be negative");
+            throw new AccidentRateException("Accident rate cannot be negative");
         }
         instance.CalculateCAECoefficient(context);
         instance.CalculateTerritorialCoefficient(context);

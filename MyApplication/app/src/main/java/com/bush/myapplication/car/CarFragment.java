@@ -58,6 +58,7 @@ public class CarFragment extends Fragment
         if (MTPL.GetInstance().getCar().getPower() != 0)
             binding.powerInput.setText(
                     String.valueOf(MTPL.GetInstance().getCar().getPower()));
-        binding.carTypeSpinner.setSelection(MTPL.GetInstance().getCar().getCarType());
+        if (MTPL.GetInstance().getCar().getCarType() != null)
+            binding.carTypeSpinner.setSelection(MTPL.GetInstance().getCar().getCarType().ordinal());
     }
 }

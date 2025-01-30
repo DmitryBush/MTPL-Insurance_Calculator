@@ -26,11 +26,6 @@ public class CarLeftButtonHandler implements ClickHandler, View.OnClickListener
     @Override
     public void OnClickHandler()
     {
-        MTPL.GetInstance().SetCar(new CarBuilder()
-                .SetPower(ParseIntegerText(binding.powerInput.getText().toString()))
-                .SetCarType(binding.carTypeSpinner.getSelectedItemPosition())
-                .Build());
-        System.out.println("here");
         NavHostFragment.findNavController(fragment)
                         .navigate(R.id.action_carFragment_to_FirstFragment);
     }

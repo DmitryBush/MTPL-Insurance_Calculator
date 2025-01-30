@@ -33,8 +33,8 @@
     </string>
 
     <string-array name="typeCarArray">
-        <item>Мотоциклы, мопеды и легкие квадроциклы (Категория "A", "M")</item>
-        <item>Легковые и грузовые автомобили (Категория "B", "BE")</item>
+        <item>Категория "A", "M"</item>
+        <item>Категория "B", "BE"</item>
     </string-array>
 
     <string name="driversTitle">

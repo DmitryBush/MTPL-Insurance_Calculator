@@ -65,10 +65,12 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameText"
                 android:layout_width="210dp"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="15"
                 app:layout_constraintBottom_toTopOf="@+id/surnameText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -79,7 +81,8 @@
                     android:id="@+id/nameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/personName" />
+                    android:hint="@string/personName"
+                    android:maxLength="15" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -100,6 +103,8 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="24dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/surname"
@@ -109,7 +114,8 @@
                     android:id="@+id/surnameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/personSurname" />
+                    android:hint="@string/personSurname"
+                    android:maxLength="15" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -126,7 +132,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ageText"
                 android:layout_width="210dp"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="24dp"
@@ -160,7 +166,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/dlText"
                 android:layout_width="210dp"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="24dp"
@@ -235,7 +241,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/kbmText"
                 android:layout_width="210dp"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="24dp"
