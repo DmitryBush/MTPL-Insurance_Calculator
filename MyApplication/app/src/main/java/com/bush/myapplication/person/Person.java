@@ -1,20 +1,22 @@
 package com.bush.myapplication.person;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 
+import com.bush.myapplication.database.Database;
 import com.bush.myapplication.structures.tableCAE.TableCAE;
 
-import java.time.LocalDate;
-import java.time.Period;
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Person
+public class Person implements Serializable
 {
     private static volatile TableCAE tableCAE = null;
 
     private String name;
     private String surname;
-    private int age;
+    private Calendar birthdayDate;
     private Calendar drivingLicenseRelease;
     private int region;
     private int city;
@@ -22,20 +24,17 @@ public class Person
     private float CAECoefficient;
     private float territorialCoefficient;
     private float accidentRate;
-    private int experience;
 
     public Person()
     {
-        name = new String();
-        surname = new String();
+        name = null;
+        surname = null;
         drivingLicenseRelease = null;
 
-        age = Integer.MIN_VALUE;
         region = 0;
         city = 0;
         territorialCoefficient = 0;
         accidentRate = 0;
-        experience = Integer.MIN_VALUE;
         CAECoefficient = 0;
     }
 
@@ -48,8 +47,13 @@ public class Person
     }
 
     public int getAge() {
+        int age = Calendar.getInstance().get(Calendar.YEAR) - birthdayDate.get(Calendar.YEAR);
+
+        if (Calendar.getInstance().get(Calendar.DAY_OF_YEAR) < birthdayDate.get(Calendar.DAY_OF_YEAR))
+            age--;
         return age;
     }
+    public Calendar getBirthdayDate() {return birthdayDate;}
 
     public int getCity() {
         return city;
@@ -59,8 +63,8 @@ public class Person
         return region;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthdayDate(Calendar age) {
+        birthdayDate = age;
     }
 
     public void setRegion(int region) {
@@ -93,21 +97,16 @@ public class Person
 
     public void setDrivingLicenseRelease(Calendar drivingLicenseRelease) {
         this.drivingLicenseRelease = drivingLicenseRelease;
-        CalculateExperience();
-    }
-
-    private void CalculateExperience()
-    {
-        experience = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
-                - drivingLicenseRelease.get(Calendar.DAY_OF_YEAR);
     }
 
     public int getExperience() {
-        return experience;
-    }
+        int experience = Calendar.getInstance().get(Calendar.YEAR)
+                - drivingLicenseRelease.get(Calendar.YEAR);
 
-    public void setTerritorialCoefficient(float territorialCoefficient) {
-        this.territorialCoefficient = territorialCoefficient;
+        if (Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
+                < drivingLicenseRelease.get(Calendar.DAY_OF_YEAR))
+            experience--;
+        return experience;
     }
 
     public void setAccidentRate(float accidentRate) {
@@ -116,10 +115,6 @@ public class Person
 
     public float getCAECoefficient() {
         return CAECoefficient;
-    }
-
-    public void setCAECoefficient(float CAECoefficient) {
-        this.CAECoefficient = CAECoefficient;
     }
 
     public void CalculateCAECoefficient(Context context)
@@ -134,6 +129,44 @@ public class Person
                 }
             }
         }
-        CAECoefficient = tableCAE.GetCoefficient(age, experience);
+        CAECoefficient = tableCAE.GetCoefficient(getAge(), getExperience());
     }
+
+    public void CalculateTerritorialCoefficient(Context context)
+    {
+        Database database = new Database(context, "RussianSubjects.db");
+        Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
+                "FROM cities left join Place on Place.id = "
+                + (region + 1) +
+                " AND cities.subject = " + (region + 1)
+                + " WHERE Place.Subject is NOT NULL");
+
+        if (cursor.moveToFirst())
+        {
+            cursor.move(city);
+            territorialCoefficient = cursor.getFloat(3);
+        }
+        cursor.close();
+    }
+
+    @SuppressLint("DefaultLocale")
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + getAge() +
+                ", drivingLicenseRelease=" + String.format("%02d.%02d.%02d",
+                drivingLicenseRelease.get(Calendar.DAY_OF_MONTH),
+                drivingLicenseRelease.get(Calendar.MONTH),
+                drivingLicenseRelease.get(Calendar.YEAR)) +
+                ", region=" + region +
+                ", city=" + city +
+                ", CAECoefficient=" + CAECoefficient +
+                ", territorialCoefficient=" + territorialCoefficient +
+                ", accidentRate=" + accidentRate +
+                ", experience=" + getExperience() +
+                '}';
+    }
+
 }

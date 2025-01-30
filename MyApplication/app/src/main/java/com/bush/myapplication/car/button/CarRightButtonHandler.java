@@ -1,15 +1,22 @@
 package com.bush.myapplication.car.button;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
 
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
 import com.bush.myapplication.button.ClickHandler;
 import com.bush.myapplication.car.CarFragment;
+import com.bush.myapplication.car.CarFragmentDirections;
 import com.bush.myapplication.car.builder.CarBuilder;
+import com.bush.myapplication.car.exception.IncorrectPowerException;
+import com.bush.myapplication.car.exception.UnknownCarTypeException;
 import com.bush.myapplication.databinding.CarFragmentBinding;
+import com.bush.myapplication.person.Person;
 
 import java.util.Calendar;
 
@@ -26,18 +33,34 @@ public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
     @Override
     public void OnClickHandler()
     {
-        System.out.println(ParseIntegerText(binding.editTextNumberSigned.getText().toString()));
-        MTPL.GetInstance().SetCar(new CarBuilder()
-                .SetPower(ParseIntegerText(binding.editTextNumberSigned.getText().toString()))
-                .SetCarType(binding.carTypeSpinner.getSelectedItemPosition())
-                .Build());
+        try {
+            MTPL.GetInstance().SetCar(new CarBuilder()
+                    .SetPower(ParseIntegerText(binding.powerInput.getText().toString()))
+                    .SetCarType(binding.carTypeSpinner.getSelectedItemPosition())
+                    .Build());
 
-        if (MTPL.GetInstance().getPersonList().size() > 0)
-            NavHostFragment.findNavController(fragment)
-                    .navigate(R.id.action_carFragment_to_personListFragment);
-        else
-            NavHostFragment.findNavController(fragment)
-                    .navigate(R.id.action_carFragment_to_personFragment);
+            if (MTPL.GetInstance().getPersonListSize() > 0)
+                NavHostFragment.findNavController(fragment)
+                        .navigate(R.id.action_carFragment_to_personListFragment);
+            else {
+                NavDirections action = CarFragmentDirections
+                        .actionCarFragmentToPersonFragment(null);
+                NavHostFragment.findNavController(fragment).navigate(action);
+            }
+        } catch (UnknownCarTypeException e) {
+            throw new RuntimeException(e);
+        } catch (IncorrectPowerException e) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getActivity());
+
+            builder.setTitle("Некорректный ввод мощности автомобиля");
+            builder.setMessage("Введена неккоректная мощность авто");
+            builder.setCancelable(false);
+            builder.setPositiveButton("Ок",
+                    (DialogInterface.OnClickListener) (dialog, which) -> {
+                        dialog.cancel();
+                    });
+            builder.create().show();
+        }
     }
 
     @Override

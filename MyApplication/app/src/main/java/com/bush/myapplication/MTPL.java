@@ -1,10 +1,7 @@
 package com.bush.myapplication;
 
-import android.content.Context;
-
 import com.bush.myapplication.car.Car;
 import com.bush.myapplication.person.Person;
-import com.bush.myapplication.structures.tableCAE.TableCAE;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -57,10 +54,13 @@ public class MTPL
         this.car = car;
     }
 
-    public List<Person> getPersonList()
-    {
-        return personList;
-    }
+    public int getPersonIndex(Person person) { return personList.indexOf(person); }
+
+    public int getPersonListSize() {return personList.size();}
+
+    public void setDriver(int index, Person driver) {personList.set(index, driver);}
+
+    public Person getDriver(int index) {return personList.get(index);}
 
     public boolean isDriversLimit() {
         return driversLimit;
@@ -121,28 +121,25 @@ public class MTPL
 
     public float CalculateMTPL()
     {
-        Person resultPerson = new Person();
+        float CAECoefficient = 0, accidentRate = 0, territorialCoefficient = 0;
         for (Person i : personList)
         {
-            resultPerson.setCAECoefficient(
-                    Float.max(i.getCAECoefficient(), resultPerson.getCAECoefficient()));
-            resultPerson.setAccidentRate(
-                    Float.max(i.getAccidentRate(), resultPerson.getAccidentRate()));
-            resultPerson.setTerritorialCoefficient(Float.max(
-                            i.getTerritorialCoefficient(), resultPerson.getTerritorialCoefficient()));
+            CAECoefficient = Float.max(i.getCAECoefficient(), CAECoefficient);
+            accidentRate = Float.max(i.getAccidentRate(), accidentRate);
+            territorialCoefficient = Float.max(i.getTerritorialCoefficient(), territorialCoefficient);
         }
         System.out.println(car.getBasePrice());
-        System.out.println(resultPerson.getTerritorialCoefficient());
-        System.out.println(resultPerson.getAccidentRate());
+        System.out.println(territorialCoefficient);
+        System.out.println(accidentRate);
         System.out.println(limitingCoefficient);
-        System.out.println(resultPerson.getCAECoefficient());
+        System.out.println(CAECoefficient);
         System.out.println(car.getPowerCoefficient());
         System.out.println(seasonalityCoefficient);
 
-        return car.getBasePrice() * resultPerson.getTerritorialCoefficient()
-                * resultPerson.getAccidentRate()
+        return car.getBasePrice() * territorialCoefficient
+                * accidentRate
                 * limitingCoefficient
-                * resultPerson.getCAECoefficient()
+                * CAECoefficient
                 * car.getPowerCoefficient()
                 * seasonalityCoefficient;
     }

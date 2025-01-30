@@ -2,18 +2,23 @@ package com.bush.myapplication.person.listview;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
 import com.bush.myapplication.databinding.PersonListFragmentBinding;
 
-public class PersonListFragment extends Fragment
+public class PersonListFragment extends Fragment implements PersonRecyclerView.OnItemClickListener
 {
     private PersonListFragmentBinding binding;
 
@@ -23,7 +28,7 @@ public class PersonListFragment extends Fragment
     {
         binding = PersonListFragmentBinding.inflate(inflater, container, false);
 
-        binding.driversView.setAdapter(new PersonRecyclerView());
+        binding.driversView.setAdapter(new PersonRecyclerView(this));
         binding.driversView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return binding.getRoot();
@@ -51,5 +56,13 @@ public class PersonListFragment extends Fragment
     {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        NavDirections action = PersonListFragmentDirections
+                .actionPersonListFragmentToPersonFragment(
+                        MTPL.GetInstance().getDriver(position));
+        NavHostFragment.findNavController(this).navigate(action);
     }
 }

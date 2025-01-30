@@ -14,6 +14,7 @@ import com.bush.myapplication.R;
 import com.bush.myapplication.car.button.CarLeftButtonHandler;
 import com.bush.myapplication.car.button.CarRightButtonHandler;
 import com.bush.myapplication.databinding.CarFragmentBinding;
+import com.bush.myapplication.validator.FloatValidator;
 
 public class CarFragment extends Fragment
 {
@@ -36,6 +37,8 @@ public class CarFragment extends Fragment
         binding.prev.setOnClickListener(new CarLeftButtonHandler(binding, this));
         binding.next.setOnClickListener(new CarRightButtonHandler(binding, this));
 
+        binding.powerInput.addTextChangedListener(new FloatValidator(binding.powerText));
+
         LoadSavedData();
 
         return binding.getRoot();
@@ -56,8 +59,9 @@ public class CarFragment extends Fragment
     private void LoadSavedData()
     {
         if (MTPL.GetInstance().getCar().getPower() != 0)
-            binding.editTextNumberSigned.setText(
+            binding.powerInput.setText(
                     String.valueOf(MTPL.GetInstance().getCar().getPower()));
-        binding.carTypeSpinner.setSelection(MTPL.GetInstance().getCar().getCarType());
+        if (MTPL.GetInstance().getCar().getCarType() != null)
+            binding.carTypeSpinner.setSelection(MTPL.GetInstance().getCar().getCarType().ordinal());
     }
 }
