@@ -96,10 +96,10 @@ public class PersonBuilder
         if (instance.getDrivingLicenseRelease() == null || instance.getDrivingLicenseRelease().after(Calendar.getInstance())) {
             throw new DrivingLicenseException("Driving license release date is invalid");
         }
-        if (instance.getRegion() <= 0) {
+        if (instance.getRegion() < 0) {
             throw new IllegalStateException("Region must be a positive number");
         }
-        if (instance.getCity() <= 0) {
+        if (instance.getCity() < 0) {
             throw new IllegalStateException("City must be a positive number");
         }
         if (instance.getAccidentRate() < 0) {
