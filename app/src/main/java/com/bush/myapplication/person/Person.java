@@ -136,10 +136,9 @@ public class Person implements Serializable
     {
         Database database = new Database(context, "RussianSubjects.db");
         Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
-                "FROM cities left join Place on Place.id = "
+                "FROM cities inner join Place on Place.id = "
                 + (region + 1) +
-                " AND cities.subject = " + (region + 1)
-                + " WHERE Place.Subject is NOT NULL");
+                " AND cities.subject = " + (region + 1));
 
         if (cursor.moveToFirst())
         {

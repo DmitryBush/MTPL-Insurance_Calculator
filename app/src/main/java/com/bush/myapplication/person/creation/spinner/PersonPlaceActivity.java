@@ -29,8 +29,8 @@ public class PersonPlaceActivity implements AdapterView.OnItemSelectedListener
         binding.placeConcrSpinner.setAdapter(
                 database.ExecuteSQL(
                         "select cities.id as _id, * " +
-                                "FROM cities left join Place on Place.id = " + (i + 1) +
-                                " AND cities.subject = " + (i + 1) + " WHERE Place.Subject is NOT NULL",
+                                "FROM cities inner join Place on Place.id = " + (i + 1) +
+                                " AND cities.subject = " + (i + 1),
                         new String[]{"city", "subject"}));
         if (driver != null)
             binding.placeConcrSpinner.setSelection(driver.getCity());
