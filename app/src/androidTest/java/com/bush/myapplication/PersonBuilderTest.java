@@ -15,6 +15,8 @@ import com.bush.myapplication.person.exception.SurnameDriverException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.time.LocalDate;
+
 @RunWith(AndroidJUnit4.class)
 public class PersonBuilderTest {
     @Test(expected = DrivingLicenseException.class)
@@ -70,6 +72,21 @@ public class PersonBuilderTest {
                 .SetSurname("Ivanov")
                 .SetAge("01.01.2004")
                 .SetDateLicenseRelease("03.02.2125")
+                .SetRegion(54)
+                .SetCity(0)
+                .SetAccidentRate(0.56f)
+                .Build(context);
+    }
+
+    @Test
+    public void TestPersonBuilder() throws NameDriverException, SurnameDriverException, AgeDriverException, AccidentRateException, DrivingLicenseException {
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+
+        new PersonBuilder()
+                .SetName("Ivan")
+                .SetSurname("Ivanov")
+                .SetAge("02.04.2004")
+                .SetDateLicenseRelease("03.02." + LocalDate.now().getYear())
                 .SetRegion(54)
                 .SetCity(0)
                 .SetAccidentRate(0.56f)

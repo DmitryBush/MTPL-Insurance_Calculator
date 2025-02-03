@@ -96,9 +96,11 @@ public class PersonBuilder
         if (instance.getDrivingLicenseRelease() == null
                 || instance.getDrivingLicenseRelease().after(Calendar.getInstance()))
             throw new DrivingLicenseException("Driving license release date is invalid");
-        else if (instance.getAge() - instance.getExperience() < 18 ||
-                instance.getBirthdayDate().get(Calendar.DAY_OF_YEAR)
-                > instance.getDrivingLicenseRelease().get(Calendar.DAY_OF_YEAR))
+        else if (instance.getAge() - instance.getExperience() < 18)
+            throw new DrivingLicenseException("Driving license release date is invalid");
+        else if (instance.getAge() - instance.getExperience() == 18 &&
+                instance.getDrivingLicenseRelease().get(Calendar.DAY_OF_YEAR)
+                < instance.getBirthdayDate().get(Calendar.DAY_OF_YEAR))
             throw new DrivingLicenseException("Driving license release date is invalid");
 
         if (instance.getRegion() < 0) {
