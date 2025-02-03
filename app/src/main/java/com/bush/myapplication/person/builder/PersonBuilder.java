@@ -90,21 +90,29 @@ public class PersonBuilder
         if (instance.getSurname() == null || instance.getSurname().isEmpty()) {
             throw new SurnameDriverException("Surname is required");
         }
-        if (instance.getAge() < 18 || instance.getAge() > 150) {
+        if (instance.getAge() < 18 || instance.getBirthdayDate().after(Calendar.getInstance()))
             throw new AgeDriverException("Age must be between 18 and 150, not: " + instance.getAge());
-        }
-        if (instance.getDrivingLicenseRelease() == null || instance.getDrivingLicenseRelease().after(Calendar.getInstance())) {
+
+        if (instance.getDrivingLicenseRelease() == null
+                || instance.getDrivingLicenseRelease().after(Calendar.getInstance()))
             throw new DrivingLicenseException("Driving license release date is invalid");
-        }
-        if (instance.getRegion() <= 0) {
+        else if (instance.getAge() - instance.getExperience() < 18)
+            throw new DrivingLicenseException("Driving license release date is invalid");
+        else if (instance.getAge() - instance.getExperience() == 18 &&
+                instance.getDrivingLicenseRelease().get(Calendar.DAY_OF_YEAR)
+                < instance.getBirthdayDate().get(Calendar.DAY_OF_YEAR))
+            throw new DrivingLicenseException("Driving license release date is invalid");
+
+        if (instance.getRegion() < 0) {
             throw new IllegalStateException("Region must be a positive number");
         }
-        if (instance.getCity() <= 0) {
+        if (instance.getCity() < 0) {
             throw new IllegalStateException("City must be a positive number");
         }
-        if (instance.getAccidentRate() < 0) {
-            throw new AccidentRateException("Accident rate cannot be negative");
+        if (instance.getAccidentRate() <= 0) {
+            throw new AccidentRateException("Accident rate cannot be negative or zero");
         }
+
         instance.CalculateCAECoefficient(context);
         instance.CalculateTerritorialCoefficient(context);
 

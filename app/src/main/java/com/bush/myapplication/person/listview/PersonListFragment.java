@@ -2,17 +2,14 @@ package com.bush.myapplication.person.listview;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
@@ -39,8 +36,9 @@ public class PersonListFragment extends Fragment implements PersonRecyclerView.O
         super.onViewCreated(view, savedInstanceState);
 
         binding.addDriverButton.setOnClickListener(view1 ->
-                NavHostFragment.findNavController(this)
-                        .navigate(R.id.action_personListFragment_to_personFragment));
+                    NavHostFragment.findNavController(this)
+                            .navigate(PersonListFragmentDirections
+                                    .actionPersonListFragmentToPersonFragment(null)));
 
         binding.prev.setOnClickListener(view1 ->
                 NavHostFragment.findNavController(this)
