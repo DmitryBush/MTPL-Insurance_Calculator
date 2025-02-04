@@ -62,7 +62,7 @@
     </string>
 
     <string name="personPlace">
-        Место жительства
+        Адрес
     </string>
 
     <string name="personDateReleaseDL">
@@ -70,6 +70,10 @@
     </string>
 
     <string name="personKBM">
+        КБМ
+    </string>
+
+    <string name="KBMHint">
         Коэффицент КБМ
     </string>
 

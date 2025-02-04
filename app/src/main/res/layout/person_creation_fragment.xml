@@ -5,6 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="19dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="19dp" />
+
     <TextView
         android:id="@+id/Title"
         android:layout_width="wrap_content"
@@ -49,16 +63,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="134dp"
+            tools:layout_editor_absoluteY="221dp">
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="48dp"
+                android:layout_marginEnd="40dp"
                 android:text="@string/personName"
                 app:layout_constraintBottom_toTopOf="@+id/surname"
+                app:layout_constraintEnd_toStartOf="@+id/nameText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,14 +84,13 @@
                 android:id="@+id/nameText"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="15"
                 app:layout_constraintBottom_toTopOf="@+id/surnameText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/name"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -89,10 +106,12 @@
                 android:id="@+id/surname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="88dp"
+                android:layout_marginEnd="24dp"
                 android:text="@string/personSurname"
                 app:layout_constraintBottom_toTopOf="@+id/perAge"
+                app:layout_constraintEnd_toStartOf="@+id/surnameText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -102,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="15"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,10 +141,12 @@
                 android:id="@+id/perAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="90dp"
+                android:layout_marginEnd="3dp"
                 android:text="@string/personAge"
                 app:layout_constraintBottom_toTopOf="@+id/perDl"
+                app:layout_constraintEnd_toStartOf="@+id/ageText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/surname" />
 
@@ -133,9 +154,9 @@
                 android:id="@+id/ageText"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="3dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="29dp"
                 app:layout_constraintBottom_toTopOf="@+id/dlText"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -157,9 +178,11 @@
                 android:id="@+id/perDl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="72dp"
+                android:layout_marginEnd="1dp"
                 android:text="@string/personDateReleaseDL"
+                app:layout_constraintEnd_toStartOf="@+id/dlText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/perAge" />
 
@@ -167,9 +190,9 @@
                 android:id="@+id/dlText"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="1dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 android:clickable="true"
                 android:enabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -195,9 +218,11 @@
                 android:id="@+id/perPlace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="64dp"
+                android:layout_marginEnd="34dp"
                 android:text="@string/personPlace"
+                app:layout_constraintEnd_toStartOf="@+id/placeSpinner"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/perDl" />
 
@@ -205,9 +230,9 @@
                 android:id="@+id/placeSpinner"
                 android:layout_width="210dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="34dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="32dp"
                 android:spinnerMode="dialog"
                 app:layout_constraintBottom_toTopOf="@+id/placeConcrSpinner"
@@ -220,21 +245,26 @@
                 android:id="@+id/placeConcrSpinner"
                 android:layout_width="210dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginEnd="16dp"
                 android:spinnerMode="dialog"
                 app:layout_constraintBottom_toTopOf="@+id/kbmText"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.92"
+                app:layout_constraintStart_toEndOf="@+id/perPlace"
                 app:layout_constraintTop_toBottomOf="@+id/placeSpinner" />
 
             <TextView
                 android:id="@+id/perKBM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="142dp"
+                android:layout_marginEnd="39dp"
                 android:layout_marginBottom="20dp"
                 android:text="@string/personKBM"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/kbmText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/perPlace" />
 
@@ -242,9 +272,9 @@
                 android:id="@+id/kbmText"
                 android:layout_width="210dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="39dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -257,9 +287,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="true"
-                    android:hint="@string/personKBM"
+                    android:hint="@string/KBMHint"
                     android:inputType="number|numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="131dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
