@@ -7,124 +7,147 @@
     android:baselineAligned="false"
     android:orientation="vertical"
     tools:context=".car_fragment">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CarFragment">
 
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="500dp"
-        android:text="@string/aboutCarTitle"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CarFragment">
 
-    <TextView
-        android:id="@+id/decript"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/aboutCarDescript"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Title" />
-
-    <TextView
-        android:id="@+id/carType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/carType"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/decript" />
-
-    <Spinner
-        android:id="@+id/carTypeSpinner"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/powerText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/carType"
-        app:layout_constraintTop_toBottomOf="@+id/decript" />
-
-    <TextView
-        android:id="@+id/carPower"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="72dp"
-        android:text="@string/carPower"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carType" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/powerText"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/carPower"
-        app:layout_constraintTop_toBottomOf="@+id/carTypeSpinner">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/powerInput"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/carPower" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="500dp"
+            android:text="@string/aboutCarTitle"
+            android:textAlignment="center"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/prev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="135dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
-        android:clickable="true"
-        android:src="@mipmap/ic_prev"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/next"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        <TextView
+            android:id="@+id/decript"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/aboutCarDescript"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Title" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginBottom="32dp"
-        android:clickable="true"
-        android:src="@mipmap/ic_next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/prev"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        <TextView
+            android:id="@+id/carType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="72dp"
+            android:text="@string/carType"
+            app:layout_constraintBottom_toTopOf="@+id/carPower"
+            app:layout_constraintEnd_toStartOf="@+id/carTypeSpinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/decript" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/carPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginEnd="9dp"
+            android:text="@string/carPower"
+            app:layout_constraintEnd_toStartOf="@+id/powerText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carType" />
+
+        <Spinner
+            android:id="@+id/carTypeSpinner"
+            android:layout_width="210dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="36dp"
+            app:layout_constraintBottom_toTopOf="@+id/powerText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/carType"
+            app:layout_constraintTop_toBottomOf="@+id/decript" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/powerText"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/carPower"
+            app:layout_constraintTop_toBottomOf="@+id/carTypeSpinner">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/powerInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/carPower"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="135dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:src="@mipmap/ic_prev"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/next"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="135dp"
+            android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:src="@mipmap/ic_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/prev"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="19dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="19dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

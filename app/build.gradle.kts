@@ -12,7 +12,7 @@ android {
         minSdk = 19
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.01"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.navigation.ui)
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
