@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "main", "dev" ]
+    branches: [ "dev", "main" ]
 
 jobs:
   build:
@@ -23,3 +23,9 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run unit tests
+      run: ./gradlew test
