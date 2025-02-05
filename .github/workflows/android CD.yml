@@ -22,13 +22,15 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
   tests:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run unit tests
+    - name: Run tests
       run: ./gradlew test
 
   build_apk:
+    needs: tests
     runs-on: ubuntu-latest
 
     if: startsWith(github.head_ref, 'dev/') == true
