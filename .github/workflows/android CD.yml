@@ -43,7 +43,6 @@ jobs:
     needs: tests
     runs-on: ubuntu-latest
 
-    if: startsWith(github.head_ref, 'dev/') == true
     steps:
     - uses: actions/checkout@v4
     - name: set up JDK 17
