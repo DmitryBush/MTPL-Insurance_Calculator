@@ -74,9 +74,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Insurance_calculator.apk
-        path: app/build/outputs/apk/release/app-release-unsigned.apk
+        path: app/build/outputs/apk/release/app-release.apk
     - name: Upload aab
       uses: actions/upload-artifact@v4
       with:
         name: Insurance_calculator.aab
-        path: app/build/outputs/bundle/release/app-release-unsigned.aab
+        path: app/build/outputs/bundle/release/app-release.aab
