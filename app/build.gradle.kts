@@ -23,8 +23,8 @@ android {
         create("release") {
             storeFile = file("keystore/MTPL.jks")
             storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("RELEASE_SIGN_KEY_ALIAS")
-            keyPassword = System.getenv("RELEASE_SIGN_KEY_PASSWORD")
+            keyAlias = System.getenv("SIGNED_KEY_ALIAS")
+            keyPassword = System.getenv("SIGNED_KEY_PASSWORD")
         }
     }
 
