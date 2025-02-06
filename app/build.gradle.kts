@@ -31,7 +31,7 @@ android {
                 keyAlias = keystoreProperties.getProperty("keyAlias")
                 keyPassword = keystoreProperties.getProperty("keyPassword")
             } else {
-                storeFile = file("keystore/my_app_keystore")
+                storeFile = file("keystore/MTPL")
                 storePassword = System.getenv("KEYSTORE_PASSWORD")
                 keyAlias = System.getenv("RELEASE_SIGN_KEY_ALIAS")
                 keyPassword = System.getenv("RELEASE_SIGN_KEY_PASSWORD")
