@@ -15,5 +15,5 @@
 local.properties
 build
 release
-/keystore
+keystore
 .idea
