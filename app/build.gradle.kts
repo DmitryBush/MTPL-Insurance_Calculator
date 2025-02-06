@@ -20,28 +20,17 @@ android {
     }
 
     signingConfigs {
-        create("git_release") {
-            var keystoreProperties = Properties()
-            var keystorePropsFile = file("keystore/keystore_config")
-
-            if (keystorePropsFile.exists()) {
-                keystorePropsFile.inputStream().use { keystoreProperties.load(it) }
-                storeFile = file(keystoreProperties.getProperty("storeFile"))
-                storePassword = keystoreProperties.getProperty("storePassword")
-                keyAlias = keystoreProperties.getProperty("keyAlias")
-                keyPassword = keystoreProperties.getProperty("keyPassword")
-            } else {
-                storeFile = file("keystore/MTPL")
-                storePassword = System.getenv("KEYSTORE_PASSWORD")
-                keyAlias = System.getenv("RELEASE_SIGN_KEY_ALIAS")
-                keyPassword = System.getenv("RELEASE_SIGN_KEY_PASSWORD")
-            }
+        create("release") {
+            storeFile = file("keystore/MTPL.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("RELEASE_SIGN_KEY_ALIAS")
+            keyPassword = System.getenv("RELEASE_SIGN_KEY_PASSWORD")
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("git_release")
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
