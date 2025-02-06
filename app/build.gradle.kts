@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     id("androidx.navigation.safeargs")
@@ -17,8 +19,29 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("git_release") {
+            var keystoreProperties = Properties()
+            var keystorePropsFile = file("keystore/keystore_config")
+
+            if (keystorePropsFile.exists()) {
+                keystorePropsFile.inputStream().use { keystoreProperties.load(it) }
+                storeFile = file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            } else {
+                storeFile = file("keystore/MTPL")
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("RELEASE_SIGN_KEY_ALIAS")
+                keyPassword = System.getenv("RELEASE_SIGN_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("git_release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
