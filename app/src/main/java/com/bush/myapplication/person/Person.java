@@ -122,14 +122,12 @@ public class Person implements Serializable
 
     public void CalculateCAECoefficient()
     {
-        CAECoefficient = cae.findAll(new QueryArgument("cae",
-                        "? between minAge and maxAge and " +
+        var result = cae.findById(new QueryArgument("cae",
+                "? between minAge and maxAge and " +
                         "? between minExperience and maxExperience",
                 new String[]{String.valueOf(getAge()), String.valueOf(getExperience())},
-                null, null, null, null))
-                .stream()
-                .findFirst()
-                .get().coefficient();
+                null, null, null, null));
+        CAECoefficient = result.get().coefficient();
     }
 
     public void CalculateTerritorialCoefficient()

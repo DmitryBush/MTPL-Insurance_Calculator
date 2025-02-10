@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.bush.myapplication.database.Database;
 import com.bush.myapplication.database.entity.Cae;
+import com.bush.myapplication.database.entity.City;
+import com.bush.myapplication.database.entity.Subject;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -37,7 +39,20 @@ public class CaeDao implements DAO<Cae> {
 
     @Override
     public Optional<Cae> findById(QueryArgument arguments) {
-        return Optional.empty();
+        try(Cursor cursor = db.query(arguments.table(),
+                columns, arguments.filtration(), arguments.argsFiltration(), arguments.groupBy(),
+                arguments.having(), arguments.orderBy(), arguments.limit())) {
+            Cae cae = null;
+            if (cursor.moveToFirst())
+                cae = new Cae(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(columns[2])),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(columns[4])),
+                        cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])));
+            return Optional.ofNullable(cae);
+        }
     }
 
     public CaeDao() {}
