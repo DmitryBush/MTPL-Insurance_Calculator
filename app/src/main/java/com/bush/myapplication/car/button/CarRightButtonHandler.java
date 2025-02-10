@@ -16,7 +16,6 @@ import com.bush.myapplication.car.builder.CarBuilder;
 import com.bush.myapplication.car.exception.IncorrectPowerException;
 import com.bush.myapplication.car.exception.UnknownCarTypeException;
 import com.bush.myapplication.databinding.CarFragmentBinding;
-import com.bush.myapplication.person.Person;
 
 import java.util.Calendar;
 
@@ -34,12 +33,13 @@ public class CarRightButtonHandler implements ClickHandler, View.OnClickListener
     public void OnClickHandler()
     {
         try {
-            MTPL.GetInstance().SetCar(new CarBuilder()
+            var mtpl = MTPL.getInstance();
+            mtpl.SetCar(new CarBuilder()
                     .SetPower(ParseIntegerText(binding.powerInput.getText().toString()))
                     .SetCarType(binding.carTypeSpinner.getSelectedItemPosition())
                     .Build());
 
-            if (MTPL.GetInstance().getPersonListSize() > 0)
+            if (mtpl.getPersonListSize() > 0)
                 NavHostFragment.findNavController(fragment)
                         .navigate(R.id.action_carFragment_to_personListFragment);
             else {

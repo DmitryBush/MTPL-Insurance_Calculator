@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
@@ -63,11 +62,12 @@ public class InsuranceFragment extends Fragment
 
     private void LoadSavedData()
     {
-        if (MTPL.GetInstance().isDriversLimit())
+        var mtpl = MTPL.getInstance();
+        if (mtpl.isDriversLimit())
             binding.spinnerUsers.setSelection(1);
         else
             binding.spinnerUsers.setSelection(0);
 
-        binding.spinnerPer.setSelection(MTPL.GetInstance().getCarPeriod());
+        binding.spinnerPer.setSelection(mtpl.getCarPeriod());
     }
 }

@@ -1,18 +1,21 @@
 package com.bush.myapplication.person;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.database.Cursor;
 
-import com.bush.myapplication.database.Database;
-import com.bush.myapplication.structures.tableCAE.TableCAE;
+import com.bush.myapplication.database.dao.CaeDao;
+import com.bush.myapplication.database.dao.CityDao;
+import com.bush.myapplication.database.dao.QueryArgument;
+import com.bush.myapplication.di.Autowired;
 
 import java.io.Serializable;
 import java.util.Calendar;
 
 public class Person implements Serializable
 {
-    private static volatile TableCAE tableCAE = null;
+    @Autowired
+    private CaeDao cae;
+    @Autowired
+    private CityDao cityDao;
 
     private String name;
     private String surname;
@@ -117,35 +120,26 @@ public class Person implements Serializable
         return CAECoefficient;
     }
 
-    public void CalculateCAECoefficient(Context context)
+    public void CalculateCAECoefficient()
     {
-        if (tableCAE == null)
-        {
-            synchronized (TableCAE.class)
-            {
-                if (tableCAE == null)
-                {
-                    tableCAE = new TableCAE(context);
-                }
-            }
-        }
-        CAECoefficient = tableCAE.GetCoefficient(getAge(), getExperience());
+        CAECoefficient = cae.findAll(new QueryArgument("cae",
+                        "? between minAge and maxAge and " +
+                        "? between minExperience and maxExperience",
+                new String[]{String.valueOf(getAge()), String.valueOf(getExperience())},
+                null, null, null, null))
+                .stream()
+                .findFirst()
+                .get().coefficient();
     }
 
-    public void CalculateTerritorialCoefficient(Context context)
+    public void CalculateTerritorialCoefficient()
     {
-        Database database = new Database(context, "RussianSubjects.db");
-        Cursor cursor = database.ExecuteSQL("select cities.id as _id, * " +
-                "FROM cities inner join Place on Place.id = "
-                + (region + 1) +
-                " AND cities.subject = " + (region + 1));
-
-        if (cursor.moveToFirst())
-        {
-            cursor.move(city);
-            territorialCoefficient = cursor.getFloat(3);
-        }
-        cursor.close();
+        territorialCoefficient = cityDao.findById(
+                new QueryArgument("cities inner join subjects on subjects._id = cities.f_key_subject",
+                        "f_key_subject = ?",
+                        new String[]{String.valueOf(region + 1)},
+                        null, null, null, String.valueOf(city) + ",1"))
+                .get().coefficient();
     }
 
     @SuppressLint("DefaultLocale")

@@ -2,24 +2,28 @@ package com.bush.myapplication.person.creation.spinner;
 
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.database.Database;
+import com.bush.myapplication.database.dao.CityDao;
+import com.bush.myapplication.database.dao.QueryArgument;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
+import com.bush.myapplication.di.Autowired;
 import com.bush.myapplication.person.Person;
+
+import java.util.stream.Collectors;
 
 public class PersonPlaceActivity implements AdapterView.OnItemSelectedListener
 {
     private PersonCreationFragmentBinding binding;
-    private Database database;
+    private CityDao database = MTPL.getCityDao();
     private Person driver;
 
     public PersonPlaceActivity(PersonCreationFragmentBinding binding,
-                               Database database,
                                Person driver)
     {
         this.binding = binding;
-        this.database = database;
         this.driver = driver;
     }
 
@@ -27,11 +31,14 @@ public class PersonPlaceActivity implements AdapterView.OnItemSelectedListener
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
     {
         binding.placeConcrSpinner.setAdapter(
-                database.ExecuteSQL(
-                        "select cities.id as _id, * " +
-                                "FROM cities inner join Place on Place.id = " + (i + 1) +
-                                " AND cities.subject = " + (i + 1),
-                        new String[]{"city", "subject"}));
+                new ArrayAdapter<String>(adapterView.getContext(), android.R.layout.simple_spinner_item,
+                        database.findAll(
+                        new QueryArgument("cities inner join subjects on " +
+                                "subjects._id = cities.f_key_subject",
+                                "f_key_subject = ?", new String[]{String.valueOf(i + 1)},
+                                null, null, null, null)).stream()
+                        .map(city -> city.city()).collect(Collectors.toList()))
+        );
         if (driver != null)
             binding.placeConcrSpinner.setSelection(driver.getCity());
     }

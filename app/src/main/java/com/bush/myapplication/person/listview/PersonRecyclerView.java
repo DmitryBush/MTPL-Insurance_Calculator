@@ -11,9 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
-import com.bush.myapplication.person.Person;
-
-import java.util.List;
 
 public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.MyViewHolder>
 {
@@ -41,21 +38,22 @@ public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
+        var mtpl = MTPL.getInstance();
         holder.nameSurname.setText(
-                MTPL.GetInstance().getDriver(position).getName() + " " +
-                        MTPL.GetInstance().getDriver(position).getSurname());
+                mtpl.getDriver(position).getName() + " " +
+                        mtpl.getDriver(position).getSurname());
         holder.aboutPerson.setText("Территориальный коэффицент: "
-                + MTPL.GetInstance().getDriver(position).getTerritorialCoefficient()
+                + mtpl.getDriver(position).getTerritorialCoefficient()
                 + ", Коэффицент КБС: "
-                + MTPL.GetInstance().getDriver(position).getAccidentRate()
+                + mtpl.getDriver(position).getAccidentRate()
                 + ", Коэффицент КВС: "
-                + MTPL.GetInstance().getDriver(position).getCAECoefficient());
+                + mtpl.getDriver(position).getCAECoefficient());
     }
 
     @Override
     public int getItemCount()
     {
-        return MTPL.GetInstance().getPersonListSize();
+        return MTPL.getInstance().getPersonListSize();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder

@@ -31,9 +31,10 @@ public class InsuranceRightButtonHandler implements ClickHandler, View.OnClickLi
     @Override
     public void OnClickHandler()
     {
-        MTPL.GetInstance().setDriversLimit(
+        var mtpl = MTPL.getInstance();
+        mtpl.setDriversLimit(
                 PearseBooleanValue(binding.spinnerUsers.getSelectedItemPosition()));
-        MTPL.GetInstance().setCarPeriod(binding.spinnerPer.getSelectedItemPosition());
+        mtpl.setCarPeriod(binding.spinnerPer.getSelectedItemPosition());
 
         NavHostFragment.findNavController(fragment)
                     .navigate(R.id.action_insuranceFragment_to_resultFragment);
