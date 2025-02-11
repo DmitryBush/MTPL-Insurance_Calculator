@@ -1,14 +1,26 @@
 package com.bush.myapplication;
 
 import com.bush.myapplication.car.Car;
+import com.bush.myapplication.database.dao.CaeDao;
+import com.bush.myapplication.database.dao.CityDao;
+import com.bush.myapplication.database.dao.SubjectDao;
+import com.bush.myapplication.di.Autowired;
+import com.bush.myapplication.di.Component;
 import com.bush.myapplication.person.Person;
 
 import java.util.LinkedList;
 import java.util.List;
 
+@Component
 public class MTPL
 {
     private static volatile MTPL instance = null;
+    @Autowired
+    private static CaeDao cae;
+    @Autowired
+    private static CityDao cityDao;
+    @Autowired
+    private static SubjectDao subjectDao;
 
     private Car car;
     private List<Person> personList;
@@ -24,7 +36,7 @@ public class MTPL
         personList = new LinkedList<>();
     }
 
-    public static MTPL GetInstance()
+    public static MTPL getInstance()
     {
         if (instance == null)
         {
@@ -142,5 +154,17 @@ public class MTPL
                 * CAECoefficient
                 * car.getPowerCoefficient()
                 * seasonalityCoefficient;
+    }
+
+    public static CityDao getCityDao() {
+        return cityDao;
+    }
+
+    public static CaeDao getCae() {
+        return cae;
+    }
+
+    public static SubjectDao getSubjectDao() {
+        return subjectDao;
     }
 }

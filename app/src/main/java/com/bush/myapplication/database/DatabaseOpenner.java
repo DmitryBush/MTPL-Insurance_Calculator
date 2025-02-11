@@ -17,15 +17,13 @@ import java.io.OutputStream;
 public class DatabaseOpenner extends SQLiteOpenHelper
 {
     private String path;
-    private String name;
-    private Context context;
 
-    public DatabaseOpenner(@Nullable Context context, String name)
+    public DatabaseOpenner(@Nullable Context context, String fileName)
     {
-        super(context, name, null, 1);
-        this.context = context;
-        this.name = name;
-        path = context.getFilesDir().getPath() + name;
+        super(context, fileName, null, 1);
+
+        path = context.getFilesDir().getPath() + "/" + fileName;
+        create_db(context, fileName);
     }
 
     public SQLiteDatabase open() throws SQLException
@@ -43,11 +41,11 @@ public class DatabaseOpenner extends SQLiteOpenHelper
 
     }
 
-    public void create_db() {
+    public void create_db(Context context, String fileName) {
         File file = new File(path);
         if (!file.exists()) {
             //получаем локальную бд как поток
-            try (InputStream myInput = context.getAssets().open(name);
+            try (InputStream myInput = context.getAssets().open(fileName);
                  // Открываем пустую бд
                  OutputStream myOutput = new FileOutputStream(path)) {
 

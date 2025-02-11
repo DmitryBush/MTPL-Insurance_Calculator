@@ -23,7 +23,7 @@ public class ResultFragment extends Fragment
             Bundle savedInstanceState)
     {
         binding = ResultFragmentBinding.inflate(inflater, container, false);
-        binding.result.setText(String.valueOf(MTPL.GetInstance().CalculateMTPL()) + " рубля");
+        binding.result.setText(String.valueOf(MTPL.getInstance().CalculateMTPL()) + " рубля");
 
         return binding.getRoot();
     }

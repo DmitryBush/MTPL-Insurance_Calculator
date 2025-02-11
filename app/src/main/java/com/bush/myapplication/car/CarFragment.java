@@ -58,10 +58,11 @@ public class CarFragment extends Fragment
 
     private void LoadSavedData()
     {
-        if (MTPL.GetInstance().getCar().getPower() != 0)
+        var mtpl = MTPL.getInstance();
+        if (mtpl.getCar().getPower() != 0)
             binding.powerInput.setText(
-                    String.valueOf(MTPL.GetInstance().getCar().getPower()));
-        if (MTPL.GetInstance().getCar().getCarType() != null)
-            binding.carTypeSpinner.setSelection(MTPL.GetInstance().getCar().getCarType().ordinal());
+                    String.valueOf(mtpl.getCar().getPower()));
+        if (mtpl.getCar().getCarType() != null)
+            binding.carTypeSpinner.setSelection(mtpl.getCar().getCarType().ordinal());
     }
 }

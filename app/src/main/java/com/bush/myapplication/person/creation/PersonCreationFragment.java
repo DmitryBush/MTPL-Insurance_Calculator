@@ -7,13 +7,20 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.SimpleAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bush.myapplication.MTPL;
 import com.bush.myapplication.database.Database;
 import com.bush.myapplication.database.SQLCommands;
+import com.bush.myapplication.database.dao.QueryArgument;
+import com.bush.myapplication.database.dao.SubjectDao;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
+import com.bush.myapplication.di.Autowired;
+import com.bush.myapplication.di.DiContainer;
 import com.bush.myapplication.person.Person;
 import com.bush.myapplication.person.creation.button.AgeDatePicker;
 import com.bush.myapplication.person.creation.button.LicenseDatePicker;
@@ -25,6 +32,7 @@ import com.bush.myapplication.validator.FloatValidator;
 import com.bush.myapplication.validator.TextValidator;
 
 import java.text.SimpleDateFormat;
+import java.util.stream.Collectors;
 
 
 public class PersonCreationFragment extends Fragment
@@ -39,7 +47,7 @@ public class PersonCreationFragment extends Fragment
         binding = PersonCreationFragmentBinding.inflate(inflater, container, false);
         PersonCreationFragmentArgs args = PersonCreationFragmentArgs.fromBundle(getArguments());
 
-        Database database = new Database(getContext(), "RussianSubjects.db");
+        var database = MTPL.getSubjectDao();
         Person driver = args.getDriver();
 
         try {
@@ -54,21 +62,28 @@ public class PersonCreationFragment extends Fragment
             binding.dlInput.setText(
                     simpleDateFormat.format(driver.getDrivingLicenseRelease().getTime()));
 
-
-            binding.placeSpinner.setAdapter(database.ExecuteSQL(SQLCommands.Select,
-                    "Place", new String[]{"Subject"}));
+            binding.placeSpinner.setAdapter(new ArrayAdapter<String>(getContext(),
+                    android.R.layout.simple_spinner_item, database.findAll(
+                    new QueryArgument("subjects", null,
+                            null, null, null,
+                            null, null)).stream()
+                    .map(subject -> subject.subject()).collect(Collectors.toList())));
             binding.placeSpinner.setSelection(driver.getRegion());
 
             binding.kbmInput.setText(new Float(driver.getAccidentRate()).toString());
             binding.placeSpinner.setOnItemSelectedListener(
-                    new PersonPlaceActivity(binding, database, driver));
+                    new PersonPlaceActivity(binding, driver));
         } catch (NullPointerException e) {
             System.out.println("NullPointerException");
-            binding.placeSpinner.setAdapter(database.ExecuteSQL(SQLCommands.Select,
-                "Place", new String[]{"Subject"}));
+            binding.placeSpinner.setAdapter(new ArrayAdapter<String>(getContext(),
+                    android.R.layout.simple_spinner_item, database.findAll(
+                            new QueryArgument("subjects", null,
+                                    null, null, null,
+                                    null, null)).stream()
+                    .map(subject -> subject.subject()).collect(Collectors.toList())));
 
             binding.placeSpinner.setOnItemSelectedListener(
-                    new PersonPlaceActivity(binding, database, null));
+                    new PersonPlaceActivity(binding, null));
         }
         finally {
             binding.prev.setOnClickListener(new PersonLeftButtonHandler(this, driver));

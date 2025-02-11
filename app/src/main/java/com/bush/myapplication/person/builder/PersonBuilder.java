@@ -3,6 +3,7 @@ package com.bush.myapplication.person.builder;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.bush.myapplication.di.DiContainer;
 import com.bush.myapplication.person.Person;
 import com.bush.myapplication.person.exception.AccidentRateException;
 import com.bush.myapplication.person.exception.AgeDriverException;
@@ -83,7 +84,8 @@ public class PersonBuilder
         instance.setAccidentRate(rate);
         return this;
     }
-    public Person Build(Context context) throws NameDriverException, SurnameDriverException, AgeDriverException, DrivingLicenseException, AccidentRateException {
+    public Person Build() throws NameDriverException, SurnameDriverException, AgeDriverException, DrivingLicenseException, AccidentRateException {
+        DiContainer.initialize(instance);
         if (instance.getName() == null || instance.getName().isEmpty()) {
             throw new NameDriverException("Name is required");
         }
@@ -113,8 +115,8 @@ public class PersonBuilder
             throw new AccidentRateException("Accident rate cannot be negative or zero");
         }
 
-        instance.CalculateCAECoefficient(context);
-        instance.CalculateTerritorialCoefficient(context);
+        instance.CalculateCAECoefficient();
+        instance.CalculateTerritorialCoefficient();
 
         return instance;
     }
