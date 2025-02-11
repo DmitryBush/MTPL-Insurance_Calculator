@@ -3,7 +3,6 @@ package com.bush.myapplication.person.creation.button;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.view.View;
 
 import androidx.navigation.fragment.NavHostFragment;
@@ -11,7 +10,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.bush.myapplication.MTPL;
 import com.bush.myapplication.R;
 import com.bush.myapplication.button.ClickHandler;
-import com.bush.myapplication.database.Database;
 import com.bush.myapplication.databinding.PersonCreationFragmentBinding;
 import com.bush.myapplication.person.Person;
 import com.bush.myapplication.person.creation.PersonCreationFragment;
@@ -24,7 +22,6 @@ import com.bush.myapplication.person.exception.SurnameDriverException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -47,8 +44,9 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
     public void OnClickHandler()
     {
         try {
+            var mtpl = MTPL.getInstance();
             if (driver != null)
-                MTPL.GetInstance().setDriver(MTPL.GetInstance().getPersonIndex(driver),
+                mtpl.setDriver(mtpl.getPersonIndex(driver),
                         new PersonBuilder(driver)
                                 .SetName(binding.nameInput.getText().toString())
                                 .SetSurname(binding.surnameInput.getText().toString())
@@ -57,9 +55,9 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
                                 .SetRegion(binding.placeSpinner.getSelectedItemPosition())
                                 .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
                                 .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
-                                .Build(fragment.getContext()));
+                                .Build());
             else
-                MTPL.GetInstance().AppendPerson(new PersonBuilder()
+                mtpl.AppendPerson(new PersonBuilder()
                         .SetName(binding.nameInput.getText().toString())
                         .SetSurname(binding.surnameInput.getText().toString())
                         .SetAge(binding.ageInput.getText().toString())
@@ -67,7 +65,7 @@ public class PersonRightButtonHandler implements ClickHandler, View.OnClickListe
                         .SetRegion(binding.placeSpinner.getSelectedItemPosition())
                         .SetCity(binding.placeConcrSpinner.getSelectedItemPosition())
                         .SetAccidentRate(ParseFloatText(binding.kbmInput.getText().toString()))
-                        .Build(fragment.getContext()));
+                        .Build());
             NavHostFragment.findNavController(fragment)
                     .navigate(R.id.action_personCreationFragment_to_personListFragment);
         } catch (NameDriverException e) {

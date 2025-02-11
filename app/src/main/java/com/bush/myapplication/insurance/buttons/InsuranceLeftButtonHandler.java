@@ -32,11 +32,12 @@ public class InsuranceLeftButtonHandler implements ClickHandler, View.OnClickLis
     @Override
     public void OnClickHandler()
     {
-        MTPL.GetInstance().setDriversLimit(PearseBooleanValue(binding.spinnerUsers
+        var mtpl = MTPL.getInstance();
+        mtpl.setDriversLimit(PearseBooleanValue(binding.spinnerUsers
                 .getSelectedItemPosition()));
-        MTPL.GetInstance().setCarPeriod(binding.spinnerPer.getSelectedItemPosition());
+        mtpl.setCarPeriod(binding.spinnerPer.getSelectedItemPosition());
 
-        if (MTPL.GetInstance().getPersonListSize() > 0)
+        if (mtpl.getPersonListSize() > 0)
             NavHostFragment.findNavController(fragment)
                     .navigate(R.id.action_insuranceFragment_to_personListFragment);
         else

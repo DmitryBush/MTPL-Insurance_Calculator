@@ -16,13 +16,23 @@ navigationUi = "2.6.0"
 navigationUiVersion = "2.8.5"
 postgresql = "42.7.3"
 slf4jApi = "2.0.16"
+springAop = "6.2.2"
+springBeans = "6.2.2"
+springBeansVersion = "5.3.39"
+springBootStarter = "3.4.2"
 springContext = "6.1.12"
+springContextVersion = "6.2.2"
+springCore = "6.2.2"
+springCoreVersion = "5.3.39"
+springframeworkSpringContext = "5.3.39"
 
 [libraries]
+boot-spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logbackClassic" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
@@ -36,9 +46,18 @@ navigation-ui-v285 = { module = "androidx.navigation:navigation-ui", version.ref
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4jApi" }
 spring-aop = { module = "org.springframework:spring-aop", version.ref = "springContext" }
+spring-aop-v622 = { module = "org.springframework:spring-aop", version.ref = "springAop" }
 spring-beans = { module = "org.springframework:spring-beans", version.ref = "springContext" }
+spring-beans-v5339 = { module = "org.springframework:spring-beans", version.ref = "springBeansVersion" }
+spring-beans-v622 = { module = "org.springframework:spring-beans", version.ref = "springBeans" }
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "springBootStarter" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-context = { module = "org.springframework:spring-context", version.ref = "springContext" }
+spring-context-v5339 = { module = "org.springframework:spring-context", version.ref = "springframeworkSpringContext" }
+spring-context-v622 = { module = "org.springframework:spring-context", version.ref = "springContextVersion" }
 spring-core = { module = "org.springframework:spring-core", version.ref = "springContext" }
+spring-core-v5339 = { module = "org.springframework:spring-core", version.ref = "springCoreVersion" }
+spring-core-v622 = { module = "org.springframework:spring-core", version.ref = "springCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
