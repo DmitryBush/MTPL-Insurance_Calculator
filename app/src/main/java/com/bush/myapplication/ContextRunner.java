@@ -25,7 +25,7 @@ public class ContextRunner extends Application {
         }
     }
 
-    private void initializeDatabase(Object object) throws NoSuchMethodException,
+    public void initializeDatabase(Object object) throws NoSuchMethodException,
             InvocationTargetException, IllegalAccessException {
         var clazz = object.getClass();
         for (var field:clazz.getDeclaredFields()) {
