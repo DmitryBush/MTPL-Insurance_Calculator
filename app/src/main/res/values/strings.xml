@@ -62,7 +62,11 @@
     </string>
 
     <string name="personPlace">
-        Адрес
+        Область
+    </string>
+
+    <string name="driverCity">
+        Город
     </string>
 
     <string name="personDateReleaseDL">
