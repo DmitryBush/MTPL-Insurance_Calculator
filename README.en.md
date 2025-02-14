@@ -1,5 +1,5 @@
 ### MTPL - Insurance Calculator
-[![ru](https://img.shields.io/badge/lang-en-red.svg)]()
+[![ru](https://img.shields.io/badge/lang-ru-red.svg)](https://github.com/DmitryBush/MTPL-Insurance_Calculator/blob/main/README.md)
 ## Description
 This application allows you to calculate OSAGO in just a couple of minutes! 
 Save time by avoiding complex formulas and visiting insurance companies. 
